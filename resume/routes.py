@@ -1,6 +1,6 @@
 from flask import Flask,render_template,url_for,flash,redirect,request,abort
 from resume.forms import Reg,Login,account,posting,resumebuilder
-from resume.models import user,posts
+from resume.models import user,posts,education
 from resume import app,db, bcrypt
 from flask_login import login_user,current_user,logout_user,login_required
 import secrets,os
@@ -98,8 +98,8 @@ def accounts():
 def  post():
     form = resumebuilder()
     if form.validate_on_submit():
-        post = posts(title=form.title.data,content=form.content.data,author=current_user)
-        db.session.add(post)
+        edu = education(name=form.college.data,start=form.start.data,end=form.end.data,cgpa=form.cgpa.data,edu=current_user)
+        db.session.add(edu)
         db.session.commit()
         return redirect(url_for("hello"))
     return render_template("posts.html",title="New Posts",form=form)
