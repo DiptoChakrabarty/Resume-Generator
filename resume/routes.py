@@ -1,5 +1,5 @@
 from flask import Flask,render_template,url_for,flash,redirect,request,abort
-from resume.forms import Reg,Login,account,posting
+from resume.forms import Reg,Login,account,posting,resumebuilder
 from resume.models import user,posts
 from resume import app,db, bcrypt
 from flask_login import login_user,current_user,logout_user,login_required
@@ -96,7 +96,7 @@ def accounts():
 @app.route("/posts/new",methods=['GET','POST'])
 @login_required
 def  post():
-    form = posting()
+    form = resumebuilder()
     if form.validate_on_submit():
         post = posts(title=form.title.data,content=form.content.data,author=current_user)
         db.session.add(post)

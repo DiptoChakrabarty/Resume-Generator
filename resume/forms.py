@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed,FileField
-from wtforms import StringField, PasswordField,SubmitField,BooleanField,TextAreaField
+from wtforms import StringField, PasswordField,SubmitField,BooleanField,TextAreaField,DateField
 from wtforms.validators import DataRequired,Length,Email,EqualTo,ValidationError
 from resume.models import user,posts
 from flask_login import current_user
@@ -60,10 +60,31 @@ class account(FlaskForm):
 
 
 class posting(FlaskForm):
-    title = StringField("Video title",
+    title = StringField("Name",
         validators=[DataRequired(),Length(min=5)])
     content = TextAreaField("Description",
         validators=[DataRequired(),Length(min=15)])
     submit = SubmitField("Create Post")
+
+class resumebuilder(FlaskForm):
+    name= StringField("Name",
+        validators=[DataRequired(),Length(min=5)])
+    email = StringField("Email Id",
+        validators=[DataRequired(),Length(min=5)])
+    phoneno= StringField("Phone No",
+        validators=[DataRequired(),Length(min=5)])
+    
+    #Education
+    college = StringField("College",
+        validators=[DataRequired(),Length(min=5)])
+    start = DateField('Start Date', format='%m/%d/%Y', 
+         validators=[DataRequired()])
+    end  = DateField('End Date', format='%m/%d/%Y', 
+        validators=[DataRequired()])
+    cgpa  = StringField("CGPA",
+        validators=[DataRequired()])
+
+    
+    submit = SubmitField("Create Resume")
 
      
