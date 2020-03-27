@@ -83,6 +83,18 @@ class resumebuilder(FlaskForm):
         validators=[DataRequired()])
     cgpa  = StringField("CGPA",
         validators=[DataRequired()])
+    
+    #Work Experience
+    company = StringField("Company",
+        validators=[DataRequired(),Length(min=5)])
+    position = StringField("Position",
+        validators=[DataRequired(),Length(min=5)])
+    startexp = DateField('Start Date', format='%m/%d/%Y', 
+         validators=[DataRequired()])
+    endexp  = DateField('End Date', format='%m/%d/%Y', 
+        validators=[DataRequired()])
+    content = TextAreaField("Description",
+        validators=[DataRequired(),Length(min=15)])
 
     
     submit = SubmitField("Create Resume")

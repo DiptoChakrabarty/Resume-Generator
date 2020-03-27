@@ -15,6 +15,7 @@ class user(db.Model,UserMixin):
     password =  db.Column(db.String(60),nullable=False)
     posts= db.relationship('posts',backref='author',lazy=True)
     education = db.relationship('education',backref='edu',lazy=True)
+    experience = db.relationship('experience',backref='exp',lazy=True)
 
     def __retr__(self):
         return  "User {}  Email {}  Image {}".format(self.username,self.email,self.image_file)
@@ -35,6 +36,16 @@ class education(db.Model):
     start = db.Column(db.DateTime,nullable=False,default=datetime.utcnow())
     end = db.Column(db.DateTime,nullable=False,default=datetime.utcnow())
     cgpa = db.Column(db.Integer,nullable=False)
+    user_id= db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False)
+
+
+class experience(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    company = db.Column(db.String(100),nullable=False)
+    position = db.Column(db.String(100),nullable=False)
+    startexp = db.Column(db.DateTime,nullable=False,default=datetime.utcnow())
+    endexp = db.Column(db.DateTime,nullable=False,default=datetime.utcnow())
+    content = db.Column(db.Text,nullable=False)
     user_id= db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False)
 
 

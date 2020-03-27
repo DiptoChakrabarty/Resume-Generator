@@ -52,7 +52,7 @@
                 {{ form.phoneno(class="form-control form-control-lg") }}
                 {% endif %}
             </div>
-            
+            <h1>Education Details</h1>
             <div class="form-group">
                 {{ form.college.label(class="form-control-label") }}
 
@@ -112,6 +112,88 @@
                 {{ form.cgpa(class="form-control form-control-lg") }}
                 {% endif %}
             </div>
+
+            <h1>Work Experience</h1>
+
+            <div class="form-group">
+                {{ form.company.label(class="form-control-label") }}
+
+                {% if form.company.errors %}
+                    {{ form.company(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.company.errors %}
+                        <span>{{error}}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.company(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.position.label(class="form-control-label") }}
+
+                {% if form.position.errors %}
+                    {{ form.position(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.position.errors %}
+                        <span>{{error}}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.position(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.startexp.label(class="form-control-label") }}
+
+                {% if form.startexp.errors %}
+                    {{ form.startexp(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.startexp.errors %}
+                        <span>{{error}}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.startexp(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.endexp.label(class="form-control-label") }}
+
+                {% if form.endexp.errors %}
+                    {{ form.endexp(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.endexp.errors %}
+                        <span>{{error}}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.endexp(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.content.label(class="form-control-label") }}
+
+                {% if form.content.errors %}
+                    {{ form.content(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.content.errors %}
+                        <span>{{error}}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.content(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+
+
+
+
+
 
 
             
