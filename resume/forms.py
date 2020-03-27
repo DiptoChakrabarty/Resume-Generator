@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed,FileField
 from wtforms import StringField, PasswordField,SubmitField,BooleanField,TextAreaField
 from wtforms.validators import DataRequired,Length,Email,EqualTo,ValidationError
-from resume.models import user
+from resume.models import user,posts
 from flask_login import current_user
 
 class Reg(FlaskForm):
@@ -41,6 +41,10 @@ class account(FlaskForm):
         validators=[DataRequired(),Length(min=3,max=20)])
     new_email = StringField("New EmailId",
         validators=[Email(),DataRequired()])
+    '''new_password = PasswordField("New Password",
+        validators=[DataRequired(),Length(min=7,max=15)])
+    confirm_new_password = PasswordField("Confirm New Password",
+        validators=[DataRequired(),Length(min=7,max=15)])  '''
     picture = FileField("Update Profile Picture",validators=[FileAllowed(['jpg','png'])])
     submit = SubmitField('Update Account')
     def validate_username(self,new_username):
@@ -53,3 +57,13 @@ class account(FlaskForm):
             emailid = user.query.filter_by(email=new_email.data)
             if emailid:
                 return ValidationError("Email Id used already")
+
+
+class posting(FlaskForm):
+    title = StringField("Video title",
+        validators=[DataRequired(),Length(min=5)])
+    content = TextAreaField("Description",
+        validators=[DataRequired(),Length(min=15)])
+    submit = SubmitField("Create Post")
+
+     

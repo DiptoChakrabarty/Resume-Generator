@@ -1,4 +1,4 @@
-from videos import db,login_manager
+from resume import db,login_manager
 from flask_login import UserMixin
 from datetime import datetime
 
@@ -17,3 +17,14 @@ class user(db.Model,UserMixin):
 
     def __retr__(self):
         return  "User {}  Email {}  Image {}".format(self.username,self.email,self.image_file)
+
+class posts(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100),nullable=False)
+    date = db.Column(db.DateTime,nullable=False,default=datetime.utcnow())
+    content = db.Column(db.Text,nullable=False)
+    user_id= db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False)
+
+    def __retr__(self):
+        return  "Title {}  Date {}  ".format(self.title,self.date)
+
