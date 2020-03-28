@@ -1,6 +1,6 @@
 from flask import Flask,render_template,url_for,flash,redirect,request,abort
 from resume.forms import Reg,Login,account,posting,resumebuilder
-from resume.models import user,posts,education,experience
+from resume.models import user,posts,education,experience,projects
 from resume import app,db, bcrypt
 from flask_login import login_user,current_user,logout_user,login_required
 import secrets,os
@@ -42,7 +42,7 @@ def login():
         logged = user.query.filter_by(email=form.email.data).first()
         if logged and bcrypt.check_password_hash(logged.password,form.password.data):
             login_user(logged,remember=form.remember.data)
-            next_page = request.args.get('next')            #to get next page we want to access
+            next_page = request.args.get('next')            
             if next_page:
                 return redirect(next_page)
             else:
@@ -103,47 +103,20 @@ def  post():
         db.session.add(edu)
         db.session.commit()
         print(form.company.data,form.position.data)
-        exp = experience(company=form.company.data,position=form.position.data,startexp=form.startexp.data,endexp=form.endexp.data,content=form.content.data,exp=current_user)
         
+        exp = experience(company=form.company.data,position=form.position.data,startexp=form.startexp.data,endexp=form.endexp.data,content=form.content.data,exp=current_user)
         db.session.add(exp)
         db.session.commit()
+
+        pro = projects(projectname=form.projectname.data,startpro=form.startpro.data,endpro=form.endpro.data,description=form.description.data,url=form.url.data)
+        db.session.add(pro)
+        db.session.commit()
+
         return redirect(url_for("hello"))
     return render_template("posts.html",title="New Posts",form=form)
 
 
-@app.route("/posts/<int:post_id>")
-def post_id(post_id):
-    post = posts.query.get_or_404(post_id)
-    return render_template("id_post.html",title=post.title,post=post)
 
-@app.route("/posts/<int:post_id>/update",methods=['GET','POST'])
-@login_required
-def update_post(post_id):
-    post = posts.query.get_or_404(post_id)
-    if post.author != current_user:
-        abort(403)
-    form = posting()
-    if form.validate_on_submit():
-        post.title = form.title.data
-        post.content = form.content.data
-        db.session.commit()
-        flash('Your post has been updated!', 'success')
-        return redirect(url_for('post_id', post_id=post.id))
-    elif request.method == 'GET':
-        form.title.data = post.title
-        form.content.data = post.content
-    return render_template("posts.html",title="Update Posts",form=form)
-
-@app.route("/post/<int:post_id>/delete", methods=['POST'])
-@login_required
-def delete_post(post_id):
-    post = posts.query.get_or_404(post_id)
-    if post.author != current_user:
-        abort(403)
-    db.session.delete(post)
-    db.session.commit()
-    flash('Your post has been deleted!', 'success')
-    return redirect(url_for('hello'))
 
 
      

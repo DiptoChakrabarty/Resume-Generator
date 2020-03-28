@@ -16,6 +16,7 @@ class user(db.Model,UserMixin):
     posts= db.relationship('posts',backref='author',lazy=True)
     education = db.relationship('education',backref='edu',lazy=True)
     experience = db.relationship('experience',backref='exp',lazy=True)
+    projects = db.relationship('projects',backref='pro',lazy=True)
 
     def __retr__(self):
         return  "User {}  Email {}  Image {}".format(self.username,self.email,self.image_file)
@@ -47,6 +48,18 @@ class experience(db.Model):
     endexp = db.Column(db.DateTime,nullable=False,default=datetime.utcnow())
     content = db.Column(db.Text,nullable=False)
     user_id= db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False)
+
+
+class projects(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    projectname = db.Column(db.String(100),nullable=False)
+    startpro = db.Column(db.DateTime,nullable=False,default=datetime.utcnow())
+    endpro = db.Column(db.DateTime,nullable=False,default=datetime.utcnow())
+    description = db.Column(db.Text,default=None)
+    url = db.Column(db.String(100),default=None)
+    user_id= db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False)
+
+
 
 
 

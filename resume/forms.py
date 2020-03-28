@@ -97,6 +97,20 @@ class resumebuilder(FlaskForm):
         validators=[DataRequired(),Length(min=15)])
 
     
+    # Projects
+
+    projectname = StringField("Project Name",
+        validators=[DataRequired(),Length(min=3)])
+    startpro = DateField('Start Date', format='%m/%d/%Y', 
+         validators=[DataRequired()])
+    endpro  = DateField('End Date', format='%m/%d/%Y', 
+        validators=[DataRequired()])
+    description = TextAreaField("Description",
+        validators=[Length(min=10)])
+    url = StringField("Project Name",
+        validators=[Length(min=5)])
+
+    
     submit = SubmitField("Create Resume")
 
      

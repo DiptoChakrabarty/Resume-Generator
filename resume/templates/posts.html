@@ -190,6 +190,88 @@
                 {% endif %}
             </div>
 
+        
+        <h1>Projects</h1>
+
+        <div class="form-group">
+            {{ form.projectname.label(class="form-control-label") }}
+
+            {% if form.projectname.errors %}
+                {{ form.projectname(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.projectname.errors %}
+                    <span>{{error}}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{ form.projectname(class="form-control form-control-lg") }}
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.startpro.label(class="form-control-label") }}
+
+            {% if form.startpro.errors %}
+                {{ form.startpro(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.startpro.errors %}
+                    <span>{{error}}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{ form.startpro(class="form-control form-control-lg") }}
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.endpro.label(class="form-control-label") }}
+
+            {% if form.endpro.errors %}
+                {{ form.endpro(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.endpro.errors %}
+                    <span>{{error}}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{ form.endpro(class="form-control form-control-lg") }}
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.description.label(class="form-control-label") }}
+
+            {% if form.description.errors %}
+                {{ form.description(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.description.errors %}
+                    <span>{{error}}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{ form.description(class="form-control form-control-lg") }}
+            {% endif %}
+        </div>
+
+        
+        <div class="form-group">
+            {{ form.url.label(class="form-control-label") }}
+
+            {% if form.url.errors %}
+                {{ form.url(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.url.errors %}
+                    <span>{{error}}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{ form.url(class="form-control form-control-lg") }}
+            {% endif %}
+        </div>
+
+
+        
+
 
 
 
