@@ -5,6 +5,7 @@ font-size:100%;
 margin:0;
 padding:0;
 vertical-align:baseline;
+height: auto;
 }
 
 article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
@@ -23,10 +24,11 @@ p {
 }
 
 #cv {
-	width: 90%;
+	width: 100%;
 	max-width: 800px;
 	background: #f3f3f3;
 	margin: 30px auto;
+	height: auto;
 }
 
 .mainDetails {

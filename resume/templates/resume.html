@@ -49,48 +49,7 @@
 			</article>
 			<div class="clear"></div>
 		</section>
-		
-		
-		<section>
-			<div class="sectionTitle">
-				<h1>Work Experience</h1>
-			</div>
-			{%  for experience in exp %}
-			<div class="sectionContent">
-				<article>
-					<h2>{{ experience.company }}</h2>
-					<p class="subDetails">{{ exp.startexp }} - Present</p>
-					<p>{{ experience.content }}</p>
-				</article>
-
-			{% endfor %}
-				
-			</div>
-			<div class="clear"></div>
-		</section>
-		
-		
-		<section>
-			<div class="sectionTitle">
-				<h1>Key Skills</h1>
-			</div>
-			
-			<div class="sectionContent">
-				<ul class="keySkills">
-					<li>A Key Skill</li>
-					<li>A Key Skill</li>
-					<li>A Key Skill</li>
-					<li>A Key Skill</li>
-					<li>A Key Skill</li>
-					<li>A Key Skill</li>
-					<li>A Key Skill</li>
-					<li>A Key Skill</li>
-				</ul>
-			</div>
-			<div class="clear"></div>
-		</section>
-		
-		
+	
 		<section>
 			<div class="sectionTitle">
 				<h1>Education</h1>
@@ -112,6 +71,48 @@
 					<p class="subDetails">Qualification</p>
 					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ultricies massa et erat luctus hendrerit. Curabitur non consequat enim.</p>
 				</article>
+			</div>
+			<div class="clear"></div>
+		</section>
+		
+		
+		<section>
+			<div class="sectionTitle">
+				<h1>Work Experience</h1>
+			</div>
+			
+			<div class="sectionContent">
+				{%  for experience in exp %}
+				<article>
+					<h2>{{ experience.company }}</h2>
+					<p class="subDetails">{{ exp.startexp }} - Present</p>
+					<p>{{ experience.content }}</p>
+				</article>
+				{% endfor %}
+			
+				
+			</div>
+			
+			<div class="clear"></div>
+		</section>
+		
+		
+		<section>
+			<div class="sectionTitle">
+				<h1>Key Skills</h1>
+			</div>
+			
+			<div class="sectionContent">
+				<ul class="keySkills">
+					<li>A Key Skill</li>
+					<li>A Key Skill</li>
+					<li>A Key Skill</li>
+					<li>A Key Skill</li>
+					<li>A Key Skill</li>
+					<li>A Key Skill</li>
+					<li>A Key Skill</li>
+					<li>A Key Skill</li>
+				</ul>
 			</div>
 			<div class="clear"></div>
 		</section>
@@ -137,7 +138,13 @@
 				</article>
 
 			</div>
+			<div class="clear"></div>
 		</section>
+		
+		
+		
+
+		
 		
 	</div>
 </div>
