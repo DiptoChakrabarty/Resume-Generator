@@ -79,6 +79,8 @@ class projects(db.Model):
 
 
 
+
+
 def init_db():
     db.create_all()
 

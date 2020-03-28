@@ -89,7 +89,7 @@ def accounts():
     return render_template("account.html",title="Account",image_file=image_file,form=form)
 
 
-@app.route("/posts/new",methods=['GET','POST'])
+@app.route("/resume/new",methods=['GET','POST'])
 @login_required
 def  post():
     form = resumebuilder()
@@ -109,8 +109,47 @@ def  post():
         db.session.commit()
 
         return redirect(url_for("hello"))
-    return render_template("posts.html",title="New Posts",form=form)
+    return render_template("posts.html",title="New Resume",form=form)
 
+#### Separation#####
+@app.route("/resume/new/education",methods=['GET','POST'])
+@login_required
+def  postedu():
+    form = resumebuilder()
+    if form.validate_on_submit():
+        edu = education(name=form.college.data,start=form.start.data,end=form.end.data,cgpa=form.cgpa.data,edu=current_user)
+        print(form.college.data,form.start.data,form.end.data)
+        db.session.add(edu)
+        db.session.commit()
+        print(form.company.data,form.position.data)
+    return render_template("education.html",title="Education",form=form)
+
+
+@app.route("/resume/new/experience",methods=['GET','POST'])
+@login_required
+def  postexperience():
+    form = resumebuilder()
+    if form.validate_on_submit():
+        exp = experience(company=form.company.data,position=form.position.data,startexp=form.startexp.data,endexp=form.endexp.data,content=form.content.data,exp=current_user)
+        db.session.add(exp)
+        db.session.commit()
+        
+    return render_template("experience.html",title="Experience",form=form)
+
+
+@app.route("/resume/new/projects",methods=['GET','POST'])
+@login_required
+def  postprojects():
+    form = resumebuilder()
+    if form.validate_on_submit():
+        pro = projects(projectname=form.projectname.data,startpro=form.startpro.data,endpro=form.endpro.data,description=form.description.data,url=form.url.data)
+        db.session.add(pro)
+        db.session.commit()
+        
+    return render_template("projects.html",title="Projects",form=form)
+
+
+#### End Separation ####
 
 @app.route("/check",methods=['GET','POST'])
 @login_required
@@ -120,7 +159,7 @@ def check():
     exp = experience.query.filter_by(exp=current_user).all()
     print(exp)
     print(edu)
-    return "Success"
+    return render_template("education.html",edu=edu,exp=exp)
 
 
 @app.route("/resume",methods=["GET","POST"])
@@ -128,6 +167,7 @@ def check():
 def resumeview():
     edu = education.query.filter_by(edu=current_user).all()
     exp = experience.query.filter_by(exp=current_user).all()
+    pro = projects.query.filter_by(pro=current_user).all()
 
     #print(exp.company)
     #print(edu.name)

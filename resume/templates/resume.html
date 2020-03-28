@@ -66,11 +66,6 @@
 			
 				{% endfor %}
 				
-				<article>
-					<h2>College/University</h2>
-					<p class="subDetails">Qualification</p>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ultricies massa et erat luctus hendrerit. Curabitur non consequat enim.</p>
-				</article>
 			</div>
 			<div class="clear"></div>
 		</section>
@@ -123,20 +118,15 @@
 			</div>
 
 			<div class="sectionContent">
+				{% for project in pro %}
 				<article>
-					<h2>Project Name</h2>
-					<p class="subDetails">Date</p>
-					<p>Description</p>
-					<p>url</p>
+					<h2>{{ project.projectname }}</h2>
+					<p class="subDetails">{{ project.startpro }} - {{ project.endpro }} </p>
+					<p>{{ project.description }}</p>
+					<p>{{ project.url }}</p>
 				</article>
 
-				<article>
-					<h2>Project Name</h2>
-					<p class="subDetails">Date</p>
-					<p>Description</p>
-					<p>url</p>
-				</article>
-
+				{% endfor %}
 			</div>
 			<div class="clear"></div>
 		</section>
