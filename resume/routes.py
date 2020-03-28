@@ -116,6 +116,17 @@ def  post():
     return render_template("posts.html",title="New Posts",form=form)
 
 
+@app.route("/check",methods=['GET','POST'])
+@login_required
+def check():
+    #logged = user.query.filter_by(email=form.email.data).first()
+    edu = education.query.filter_by(edu=current_user).all()
+    exp = experience.query.filter_by(exp=current_user).all()
+    print(exp)
+    print(edu)
+    return "Success"
+
+
 
 
 

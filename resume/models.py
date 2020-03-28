@@ -39,6 +39,12 @@ class education(db.Model):
     cgpa = db.Column(db.Integer,nullable=False)
     user_id= db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False)
 
+    def __retr__(self):
+        return  "name {}  cgpa {}  user_id {}".format(self.name,self.cgpa,self.user_id)
+
+
+
+
 
 class experience(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -49,6 +55,10 @@ class experience(db.Model):
     content = db.Column(db.Text,nullable=False)
     user_id= db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False)
 
+    def __retr__(self):
+        return  "company {}  position {}  user_id {}".format(self.company,self.position,self.user_id)
+
+
 
 class projects(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -58,6 +68,11 @@ class projects(db.Model):
     description = db.Column(db.Text,default=None)
     url = db.Column(db.String(100),default=None)
     user_id= db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False)
+
+    def __retr__(self):
+        return  "projectname {}    user_id {}".format(self.projectname,self.user_id)
+
+
 
 
 
