@@ -13,10 +13,6 @@ def hello():
     return render_template("home.html")
 
 
-@app.route("/Posts")
-def about():
-    pos = posts.query.all()
-    return  render_template("about.html",posts=pos, title=title)
 
 
 @app.route("/register",methods=['GET','POST'])
@@ -125,6 +121,20 @@ def check():
     print(exp)
     print(edu)
     return "Success"
+
+
+@app.route("/resume",methods=["GET","POST"])
+@login_required
+def resumeview():
+    edu = education.query.filter_by(edu=current_user).all()
+    exp = experience.query.filter_by(exp=current_user).all()
+
+    #print(exp.company)
+    #print(edu.name)
+
+    return render_template("resume.html",edu=edu,exp=exp)
+
+
 
 
 
