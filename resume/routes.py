@@ -285,6 +285,38 @@ def delete_exp(experience_id):
     flash('Your experience detail post has been deleted!', 'success')
     return redirect(url_for('postexp'))
     
+
+#Projects
+@app.route("/resume/new/projects/<int:project_id>/update",methods=["GET","POST"])
+def update_pro(project_id):
+    proview = projects.query.get_or_404(project_id)
+
+    form = userpro()
+    if form.validate_on_submit():
+        proview.projectname = form.projectname.data
+        proview.startpro = form.startpro.data
+        proview.endpro = form.endpro.data
+        proview.description = form.description.data
+        proview.url  = form.url.data
+        db.session.commit()
+        flash('Your project details have been updated!', 'success')
+        return redirect(url_for('postprojects'))
+    elif request.method == 'GET':
+        form.projectname.data= proview.projectname
+        form.startpro.data = proview.startpro
+        form.endpro.data =  proview.endpro
+        form.description.data =  proview.description
+        form.url.data = proview.url
+    return render_template("projects.html",title="Update Projects",form=form)
+
+@app.route("/resume/new/projects/<int:project_id>/delete",methods=["GET","POST"])
+def delete_pro(project_id):
+    proview = projects.query.get_or_404(project_id)
+
+    db.session.delete(proview)
+    db.session.commit()
+    flash('Your project detail post has been deleted!', 'success')
+    return redirect(url_for('postprojects'))
     
    
 
