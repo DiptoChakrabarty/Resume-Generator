@@ -79,7 +79,7 @@ class useredu(FlaskForm):
         validators=[DataRequired()])
     cgpa  = StringField("CGPA",
         validators=[DataRequired()])  
-    submit = SubmitField("Education")
+    submit = SubmitField("Add Education")
 
 
   #Work Experience
@@ -94,7 +94,7 @@ class userexp(FlaskForm):
         validators=[DataRequired()])
     content = TextAreaField("Description",
         validators=[DataRequired(),Length(min=15)])
-    submit = SubmitField("Experience")
+    submit = SubmitField("Add Work Experience")
     
     # Projects
 class userpro(FlaskForm):
@@ -108,7 +108,7 @@ class userpro(FlaskForm):
         validators=[Length(min=10)])
     url = StringField("Project Url",
         validators=[Length(min=5)])
-    submit = SubmitField("Projects")
+    submit = SubmitField("Add Projects")
 
 
 class resumebuilder(FlaskForm):
