@@ -66,15 +66,10 @@ class posting(FlaskForm):
         validators=[DataRequired(),Length(min=15)])
     submit = SubmitField("Create Post")
 
-class resumebuilder(FlaskForm):
-    name= StringField("Name",
-        validators=[DataRequired(),Length(min=5)])
-    email = StringField("Email Id",
-        validators=[DataRequired(),Length(min=5)])
-    phoneno= StringField("Phone No",
-        validators=[DataRequired(),Length(min=5)])
-    
-    #Education
+
+
+ #Education
+class useredu(FlaskForm):
     college = StringField("College",
         validators=[DataRequired(),Length(min=5)])
     start = DateField('Start Date', format='%m/%d/%Y', 
@@ -82,9 +77,12 @@ class resumebuilder(FlaskForm):
     end  = DateField('End Date', format='%m/%d/%Y', 
         validators=[DataRequired()])
     cgpa  = StringField("CGPA",
-        validators=[DataRequired()])
-    
-    #Work Experience
+        validators=[DataRequired()])  
+    submit = SubmitField("Education")
+
+
+  #Work Experience
+class userexp(FlaskForm):
     company = StringField("Company",
         validators=[DataRequired(),Length(min=5)])
     position = StringField("Position",
@@ -95,10 +93,10 @@ class resumebuilder(FlaskForm):
         validators=[DataRequired()])
     content = TextAreaField("Description",
         validators=[DataRequired(),Length(min=15)])
-
+    submit = SubmitField("Experience")
     
     # Projects
-
+class userpro(FlaskForm):
     projectname = StringField("Project Name",
         validators=[DataRequired(),Length(min=3)])
     startpro = DateField('Start Date', format='%m/%d/%Y', 
@@ -107,10 +105,25 @@ class resumebuilder(FlaskForm):
         validators=[DataRequired()])
     description = TextAreaField("Description",
         validators=[Length(min=10)])
-    url = StringField("Project Name",
+    url = StringField("Project Url",
         validators=[Length(min=5)])
+    submit = SubmitField("Projects")
+
+
+class resumebuilder(FlaskForm):
+    name= StringField("Name",
+        validators=[DataRequired(),Length(min=5)])
+    email = StringField("Email Id",
+        validators=[DataRequired(),Length(min=5)])
+    phoneno= StringField("Phone No",
+        validators=[DataRequired(),Length(min=5)])
 
     
     submit = SubmitField("Create Resume")
+    
+ 
+
+    
+
 
      
