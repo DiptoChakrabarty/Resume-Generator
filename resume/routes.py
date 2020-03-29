@@ -94,21 +94,10 @@ def accounts():
 def  post():
     form = resumebuilder()
     if form.validate_on_submit():
-        usr = userdetails(name=form.name.data,email=form.email.data,phoneno=form.phoneno.data,profile=form.profile.data,designation=form.designation.data)
-        '''edu = education(name=form.college.data,start=form.start.data,end=form.end.data,cgpa=form.cgpa.data,edu=current_user)
-        print(form.college.data,form.start.data,form.end.data)
-        db.session.add(edu)
+        usr = userdetails(name=form.name.data,email=form.email.data,designation=form.designation.data,phoneno=form.phoneno.data,profile=form.profile.data,details=current_user)
+        db.session.add(usr)
         db.session.commit()
-        print(form.company.data,form.position.data)
-        
-        exp = experience(company=form.company.data,position=form.position.data,startexp=form.startexp.data,endexp=form.endexp.data,content=form.content.data,exp=current_user)
-        db.session.add(exp)
-        db.session.commit()
-
-        pro = projects(projectname=form.projectname.data,startpro=form.startpro.data,endpro=form.endpro.data,description=form.description.data,url=form.url.data)
-        db.session.add(pro)
-        db.session.commit()'''
-
+        print(form.name.data,form.email.data,form.designation.data)
         return redirect(url_for("postedu"))
     return render_template("posts.html",title="New Resume",form=form)
 
@@ -186,11 +175,13 @@ def resumeview():
     exp = experience.query.filter_by(exp=current_user).all()
     pro = projects.query.filter_by(pro=current_user).all()
     usr = userdetails.query.filter_by(details=current_user).first()
+    skillsadded = skills.query.filter_by(skill=current_user).all()
 
     #print(exp.company)
     #print(edu.name)
+    image_file = url_for('static',filename='profiles/'+ current_user.image_file)
 
-    return render_template("resume.html",edu=edu,exp=exp,pro=pro,usr=usr)
+    return render_template("resume.html",edu=edu,exp=exp,pro=pro,usr=usr,sk=skillsadded,image_file=image_file)
 
 
 

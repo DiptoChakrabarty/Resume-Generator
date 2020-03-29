@@ -5,9 +5,9 @@
 <div class="content-section">
     <form method="POST" action="">
         {{ form.hidden_tag() }}
-        <fieldset class="form-group">
+        <fieldset class="form-group" id="cloneunder">
             <legend class="border-bottom mb-4">Make Resume</legend>
-            <div class="form-group">
+            <div class="form-group" >
                 {{ form.name.label(class="form-control-label") }}
 
                 {% if form.name.errors %}
@@ -23,7 +23,7 @@
                 {{ form.name(class="form-control form-control-lg") }}
                 {% endif %}
             </div>
-            <div class="form-group">
+        <div class="form-group">
                 {{ form.designation.label(class="form-control-label") }}
 
                 {% if form.designation.errors %}

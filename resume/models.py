@@ -14,10 +14,15 @@ class user(db.Model,UserMixin):
     image_file = db.Column(db.String(20),nullable=False,default='default.jpg')
     password =  db.Column(db.String(60),nullable=False)
     posts= db.relationship('posts',backref='author',lazy=True)
+    #education
     education = db.relationship('education',backref='edu',lazy=True)
+    #experience
     experience = db.relationship('experience',backref='exp',lazy=True)
+    #projects
     projects = db.relationship('projects',backref='pro',lazy=True)
+    #userdetails
     userdetails = db.relationship('userdetails',backref='details',lazy=True)
+    #skills
     skills = db.relationship('skills',backref='skill',lazy=True)
 
     def __retr__(self):
@@ -30,6 +35,7 @@ class userdetails(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20),unique=True,nullable=False)
     email = db.Column(db.String(120),unique=True,nullable=False)
+    designation = db.Column(db.String(120),unique=True,nullable=False)
     phoneno =  db.Column(db.String(15),unique=True,nullable=False)
     profile = db.Column(db.Text,nullable=False)
     user_id= db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False)
