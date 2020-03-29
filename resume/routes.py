@@ -1,6 +1,6 @@
 from flask import Flask,render_template,url_for,flash,redirect,request,abort
 from resume.forms import Reg,Login,account,posting,resumebuilder,useredu,userexp,userpro
-from resume.models import user,posts,education,experience,projects
+from resume.models import user,posts,education,experience,projects,userdetails
 from resume import app,db, bcrypt
 from flask_login import login_user,current_user,logout_user,login_required
 import secrets,os
@@ -94,6 +94,7 @@ def accounts():
 def  post():
     form = resumebuilder()
     if form.validate_on_submit():
+        usr = userdetails(name=form.name.data,email=form.email.data,phoneno=form.phoneno.data,profile=form.profile.data,designation=form.designation.data)
         '''edu = education(name=form.college.data,start=form.start.data,end=form.end.data,cgpa=form.cgpa.data,edu=current_user)
         print(form.college.data,form.start.data,form.end.data)
         db.session.add(edu)
@@ -169,11 +170,12 @@ def resumeview():
     edu = education.query.filter_by(edu=current_user).all()
     exp = experience.query.filter_by(exp=current_user).all()
     pro = projects.query.filter_by(pro=current_user).all()
+    usr = userdetails.query.filter_by(details=current_user).first()
 
     #print(exp.company)
     #print(edu.name)
 
-    return render_template("resume.html",edu=edu,exp=exp,pro=pro)
+    return render_template("resume.html",edu=edu,exp=exp,pro=pro,usr=usr)
 
 
 

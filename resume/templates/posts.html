@@ -23,6 +23,21 @@
                 {{ form.name(class="form-control form-control-lg") }}
                 {% endif %}
             </div>
+            <div class="form-group">
+                {{ form.designation.label(class="form-control-label") }}
+
+                {% if form.designation.errors %}
+                    {{ form.designation(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.designation.errors %}
+                        <span>{{error}}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.designation(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+
 
             <div class="form-group">
                 {{ form.email.label(class="form-control-label") }}
@@ -51,6 +66,21 @@
                 </div>
                 {% else %}
                 {{ form.phoneno(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.profile.label(class="form-control-label") }}
+
+                {% if form.profile.errors %}
+                    {{ form.profile(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.profile.errors %}
+                        <span>{{error}}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.profile(class="form-control form-control-lg") }}
                 {% endif %}
             </div>
 

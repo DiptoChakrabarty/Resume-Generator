@@ -113,10 +113,15 @@ class userpro(FlaskForm):
 class resumebuilder(FlaskForm):
     name= StringField("Name",
         validators=[DataRequired(),Length(min=5)])
+    designation = StringField("Designation",
+        validators=[DataRequired(),Length(min=3)])
     email = StringField("Email Id",
         validators=[DataRequired(),Length(min=5)])
     phoneno= StringField("Phone No",
         validators=[DataRequired(),Length(min=5)])
+
+    profile = TextAreaField("Description",
+        validators=[Length(min=10)])
 
     
     submit = SubmitField("Create Resume")
