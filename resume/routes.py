@@ -243,7 +243,7 @@ def update_edu(education_id):
         form.start.data = eduview.start
         form.end.data = eduview.end
         form.cgpa.data =  eduview.cgpa
-    return render_template("education.html",title="Update Acheivement",form=form)
+    return render_template("education.html",title="Update Education",form=form)
 
 @app.route("/resume/new/education/<int:education_id>/delete",methods=["GET","POST"])
 def delete_edu(acheive_id):
@@ -253,6 +253,38 @@ def delete_edu(acheive_id):
     db.session.commit()
     flash('Your education detail post has been deleted!', 'success')
     return redirect(url_for('postedu'))
+
+
+#Experience
+@app.route("/resume/new/experience/<int:experience_id>/update",methods=["GET","POST"])
+def update_exp(experience_id):
+    expview = experience.query.get_or_404(experience_id)
+
+    form = userexp()
+    if form.validate_on_submit():
+        expview.company = form.company.data
+        expview.startexp = form.startexp.data
+        expview.endexp = form.endexp.data
+        expview.content = form.content.data
+        db.session.commit()
+        flash('Your education details have been updated!', 'success')
+        return redirect(url_for('postexperience'))
+    elif request.method == 'GET':
+        form.company.data= expview.company
+        form.startexp.data = expview.startexp
+        form.endexp.data = expview.endexp
+        form.content.data =  expview.content
+    return render_template("experience.html",title="Update Work Experience",form=form)
+
+@app.route("/resume/new/experience/<int:experience_id>/delete",methods=["GET","POST"])
+def delete_exp(experience_id):
+    expview = experience.query.get_or_404(experience_id)
+
+    db.session.delete(expview)
+    db.session.commit()
+    flash('Your experience detail post has been deleted!', 'success')
+    return redirect(url_for('postexp'))
+    
     
    
 
