@@ -176,17 +176,10 @@ def postacheive():
 
 #### End Separation ####
 
-@app.route("/check",methods=['GET','POST'])
-@login_required
-def check():
-    #logged = user.query.filter_by(email=form.email.data).first()
-    edu = education.query.filter_by(edu=current_user).all()
-    exp = experience.query.filter_by(exp=current_user).all()
-    print(exp)
-    print(edu)
-    return render_template("education.html",edu=edu,exp=exp)
 
 
+
+### Generate Resume
 @app.route("/resume",methods=["GET","POST"])
 @login_required
 def resumeview():
@@ -202,6 +195,37 @@ def resumeview():
     image_file = url_for('static',filename='profiles/'+ current_user.image_file)
 
     return render_template("resume.html",edu=edu,exp=exp,pro=pro,usr=usr,sk=skillsadded,achmade=achmade,image_file=image_file)
+
+
+### Updating and deleting
+@app.route("/resume/new/acheive/<int:acheive_id>/update",methods=["GET","POST"])
+def update_acheive(acheive_id):
+    achview = achievements.query.get_or_404(acheive_id)
+
+    form = achieve()
+    if form.validate_on_submit():
+        achview.achname = form.achname.data
+        achview.achdesc = form.achdesc.data
+        db.session.commit()
+        flash('Your acheivement has been updated!', 'success')
+        return redirect(url_for('postacheive'))
+    elif request.method == 'GET':
+        form.achname.data= achview.achname
+        form.achdesc.data = achview.achdesc
+    return render_template("acheive.html",title="Update Acheivement",form=form)
+
+@app.route("/resume/new/acheive/<int:acheive_id>/delete",methods=["GET","POST"])
+def delete_acheive(acheive_id):
+    achview = achievements.query.get_or_404(acheive_id)
+
+    db.session.delete(achview)
+    db.session.commit()
+    flash('Your post has been deleted!', 'success')
+    return redirect(url_for('postacheive'))
+    
+   
+
+    
 
 
 
