@@ -1,6 +1,6 @@
 from flask import Flask,render_template,url_for,flash,redirect,request,abort
-from resume.forms import Reg,Login,account,posting,resumebuilder,useredu,userexp,userpro,usersk
-from resume.models import user,posts,education,experience,projects,userdetails,skills
+from resume.forms import Reg,Login,account,posting,resumebuilder,useredu,userexp,userpro,usersk,achieve
+from resume.models import user,posts,education,experience,projects,userdetails,skills,achievements
 from resume import app,db, bcrypt
 from flask_login import login_user,current_user,logout_user,login_required
 import secrets,os
@@ -155,6 +155,22 @@ def postskills():
         #print(form.skillname.data)
 
     return render_template("skills.html",title="Skills",form=form,skillsadded=skillsadded)
+
+
+@app.route("/resume/new/acheive",methods=['GET','POST'])
+@login_required
+def postacheive():
+    form = achieve()
+    achadded = achievements.query.filter_by(ach=current_user).all()
+    if form.validate_on_submit():
+        acheive = achievements(achname=form.achname.data,achdesc=form.achname.data,ach=current_user)
+        db.session.add(acheive)
+        db.session.commit()
+        return redirect(url_for("postskills"))
+        #print(form.skillname.data)
+
+    return render_template("acheive.html",title="Acheivements",form=form,achadded=achadded)
+       
        
 
 
@@ -179,12 +195,13 @@ def resumeview():
     pro = projects.query.filter_by(pro=current_user).all()
     usr = userdetails.query.filter_by(details=current_user).first()
     skillsadded = skills.query.filter_by(skill=current_user).all()
+    achmade = achievements.query.filter_by(ach=current_user).all()
 
     #print(exp.company)
     #print(edu.name)
     image_file = url_for('static',filename='profiles/'+ current_user.image_file)
 
-    return render_template("resume.html",edu=edu,exp=exp,pro=pro,usr=usr,sk=skillsadded,image_file=image_file)
+    return render_template("resume.html",edu=edu,exp=exp,pro=pro,usr=usr,sk=skillsadded,achmade=achmade,image_file=image_file)
 
 
 

@@ -126,6 +126,26 @@
 			</div>
 			<div class="clear"></div>
 		</section>
+
+
+
+		<section>
+			<div class="sectionTitle">
+					<h1>Acheivements</h1>
+			</div>
+
+			<div class="sectionContent">
+				{% for acheive in achmade %}
+				<article>
+					<h2>{{ acheive.achname }}</h2>
+					<p>{{ acheive.achdesc }}</p>
+			
+				</article>
+
+				{% endfor %}
+			</div>
+			<div class="clear"></div>
+		</section>
 		
 		
 		

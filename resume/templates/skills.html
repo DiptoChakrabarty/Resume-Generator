@@ -31,6 +31,7 @@
             
             
             </fieldset>
+            <a href="/resume/new/acheive" class="btn btn-outline-success" style="float: right;">Go to  Acheivements</a>
             <div class="form-group">
                 {{ form.submit(class="btn btn-outline-info") }}
             </div>
@@ -50,25 +51,7 @@
     </div>
 {% endif %}
 
-<script type="text/JavaScript">
-    function createNewElement() {
-        // First create a DIV element.
-       // var txtNewInputBox = document.createElement('div');
-    
-        // Then add the content (a new input box) of the element.
-       // txtNewInputBox.innerHTML = document.getElementBy("skillclass");
-            
-        var elmnt = document.querySelectorAll("#skillclass");
-        var elmnt = elmnt[0];
-        var cln = elmnt.cloneNode(true);
-        //document.body.appendChild(cln);
-    
-        // Finally put it where it is supposed to appear.
-        document.getElementById("cloneunder").appendChild(cln);
-    }
-    </script>
-
-    
 
 
 {%  endblock content  %}
+

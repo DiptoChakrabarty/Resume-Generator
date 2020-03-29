@@ -134,6 +134,17 @@ class usersk(FlaskForm):
     
     submit = SubmitField("Add Another skill")
 
+class achieve(FlaskForm):
+    achname = StringField("Acheivement",
+        validators=[DataRequired(),Length(min=3)])
+    achdesc = TextAreaField("Description",
+        validators=[Length(min=10)])
+
+    
+    submit = SubmitField("Add")
+
+
+
     
     
  

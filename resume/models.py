@@ -24,6 +24,8 @@ class user(db.Model,UserMixin):
     userdetails = db.relationship('userdetails',backref='details',lazy=True)
     #skills
     skills = db.relationship('skills',backref='skill',lazy=True)
+    #achievements
+    achievements = db.relationship('achievements',backref='ach',lazy=True)
 
     def __retr__(self):
         return  "User {}  Email {}  Image {}".format(self.username,self.email,self.image_file)
@@ -98,6 +100,13 @@ class skills(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     skillname = db.Column(db.String(100),nullable=False)
     user_id= db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False)
+
+class achievements(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    achname = db.Column(db.String(100),nullable=False)
+    achdesc = db.Column(db.Text(100),nullable=False)
+    user_id= db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False)
+
 
 
 
