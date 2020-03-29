@@ -1,6 +1,6 @@
 from flask import Flask,render_template,url_for,flash,redirect,request,abort
-from resume.forms import Reg,Login,account,posting,resumebuilder,useredu,userexp,userpro
-from resume.models import user,posts,education,experience,projects,userdetails
+from resume.forms import Reg,Login,account,posting,resumebuilder,useredu,userexp,userpro,usersk
+from resume.models import user,posts,education,experience,projects,userdetails,skills
 from resume import app,db, bcrypt
 from flask_login import login_user,current_user,logout_user,login_required
 import secrets,os
@@ -109,7 +109,7 @@ def  post():
         db.session.add(pro)
         db.session.commit()'''
 
-        return redirect(url_for("hello"))
+        return redirect(url_for("postedu"))
     return render_template("posts.html",title="New Resume",form=form)
 
 #### Separation#####
@@ -123,7 +123,7 @@ def  postedu():
         db.session.add(edu)
         db.session.commit()
         #print(form.company.data,form.position.data)
-        return redirect(url_for("hello"))
+        return redirect(url_for("postexperience"))
     return render_template("education.html",title="Education",form=form)
 
 
@@ -135,7 +135,7 @@ def  postexperience():
         exp = experience(company=form.company.data,position=form.position.data,startexp=form.startexp.data,endexp=form.endexp.data,content=form.content.data,exp=current_user)
         db.session.add(exp)
         db.session.commit()
-        return redirect(url_for("hello"))
+        return redirect(url_for("postprojects"))
     return render_template("experience.html",title="Experience",form=form)
 
 
@@ -147,8 +147,20 @@ def  postprojects():
         pro = projects(projectname=form.projectname.data,startpro=form.startpro.data,endpro=form.endpro.data,description=form.description.data,url=form.url.data,pro=current_user)
         db.session.add(pro)
         db.session.commit()
-        return redirect(url_for("hello"))
+        return redirect(url_for("postskills"))
     return render_template("projects.html",title="Projects",form=form)
+
+@app.route("/resume/new/skills",methods=['GET','POST'])
+@login_required
+def postskills():
+    form = usersk()
+    if form.validate_on_submit():
+        sk = skills(skillname=form.skillname.data,skill=current_user)
+        db.session.add(pro)
+        db.session.commit()
+        return redirect(url_for("post"))
+    return render_template("skills.html",title="Skills",form=form)
+
 
 
 #### End Separation ####

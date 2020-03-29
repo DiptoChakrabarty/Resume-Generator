@@ -125,6 +125,13 @@ class resumebuilder(FlaskForm):
 
     
     submit = SubmitField("Create Resume")
+
+
+class usersk(FlaskForm):
+    skillname = StringField("Skill Name",
+        validators=[DataRequired(),Length(min=3)])
+    
+    submit = SubmitField("Skills")
     
  
 

@@ -18,6 +18,7 @@ class user(db.Model,UserMixin):
     experience = db.relationship('experience',backref='exp',lazy=True)
     projects = db.relationship('projects',backref='pro',lazy=True)
     userdetails = db.relationship('userdetails',backref='details',lazy=True)
+    skills = db.relationship('skills',backref='skill',lazy=True)
 
     def __retr__(self):
         return  "User {}  Email {}  Image {}".format(self.username,self.email,self.image_file)
@@ -86,6 +87,12 @@ class projects(db.Model):
 
     def __retr__(self):
         return  "projectname {}    user_id {}".format(self.projectname,self.user_id)
+
+class skills(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    skillname = db.Column(db.String(100),nullable=False)
+    user_id= db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False)
+
 
 
 

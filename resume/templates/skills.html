@@ -1,0 +1,62 @@
+{%  extends "layout.html" %}
+{% block content %}
+
+
+<div class="content-section">
+    <input type="button" value="add skill"  id="add" onclick=createNewElement()  style="float: right;">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group" id="cloneunder">
+            <legend class="border-bottom mb-4">Make Resume</legend>
+            <div class="form-group" id="skillclass">
+                {{ form.skillname.label(class="form-control-label") }}
+
+                {% if form.skillname.errors %}
+                    {{ form.skillname(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.skillname.errors %}
+                    <span>{{error}} </span>
+
+                    {% endfor %}
+
+                </div>
+                {% else %}
+                {{ form.skillname(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+
+            
+
+            <p id="newElementId"></p>
+            
+            
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+    </form>
+
+</div>
+
+<script type="text/JavaScript">
+    function createNewElement() {
+        // First create a DIV element.
+       // var txtNewInputBox = document.createElement('div');
+    
+        // Then add the content (a new input box) of the element.
+       // txtNewInputBox.innerHTML = document.getElementBy("skillclass");
+            
+        var elmnt = document.querySelectorAll("#skillclass");
+        var elmnt = elmnt[0];
+        var cln = elmnt.cloneNode(true);
+        //document.body.appendChild(cln);
+    
+        // Finally put it where it is supposed to appear.
+        document.getElementById("cloneunder").appendChild(cln);
+    }
+    </script>
+
+    
+
+
+{%  endblock content  %}

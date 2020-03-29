@@ -99,14 +99,9 @@
 			
 			<div class="sectionContent">
 				<ul class="keySkills">
-					<li>A Key Skill</li>
-					<li>A Key Skill</li>
-					<li>A Key Skill</li>
-					<li>A Key Skill</li>
-					<li>A Key Skill</li>
-					<li>A Key Skill</li>
-					<li>A Key Skill</li>
-					<li>A Key Skill</li>
+					{% for skills in sk %}
+					<li>{{  skills.skillname }}</li>
+					{% endfor %}
 				</ul>
 			</div>
 			<div class="clear"></div>
