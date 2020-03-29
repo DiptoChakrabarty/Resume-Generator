@@ -198,6 +198,7 @@ def resumeview():
 
 
 ### Updating and deleting
+#acheivments
 @app.route("/resume/new/acheive/<int:acheive_id>/update",methods=["GET","POST"])
 def update_acheive(acheive_id):
     achview = achievements.query.get_or_404(acheive_id)
@@ -222,6 +223,36 @@ def delete_acheive(acheive_id):
     db.session.commit()
     flash('Your post has been deleted!', 'success')
     return redirect(url_for('postacheive'))
+
+#education
+@app.route("/resume/new/education/<int:education_id>/update",methods=["GET","POST"])
+def update_edu(education_id):
+    eduview = education.query.get_or_404(education_id)
+
+    form = useredu()
+    if form.validate_on_submit():
+        eduview.name = form.college.data
+        eduview.start = form.start.data
+        eduview.end = form.end.data
+        eduview.cgpa = form.cgpa.data
+        db.session.commit()
+        flash('Your education details have been updated!', 'success')
+        return redirect(url_for('postedu'))
+    elif request.method == 'GET':
+        form.college.data= eduview.name
+        form.start.data = eduview.start
+        form.end.data = eduview.end
+        form.cgpa.data =  eduview.cgpa
+    return render_template("education.html",title="Update Acheivement",form=form)
+
+@app.route("/resume/new/education/<int:education_id>/delete",methods=["GET","POST"])
+def delete_edu(acheive_id):
+    eduview = education.query.get_or_404(education_id)
+
+    db.session.delete(eduview)
+    db.session.commit()
+    flash('Your education detail post has been deleted!', 'success')
+    return redirect(url_for('postedu'))
     
    
 
