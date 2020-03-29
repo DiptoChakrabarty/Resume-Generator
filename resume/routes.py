@@ -121,7 +121,7 @@ def  postedu():
         print(form.college.data,form.start.data,form.end.data)
         db.session.add(edu)
         db.session.commit()
-        print(form.company.data,form.position.data)
+        #print(form.company.data,form.position.data)
         return redirect(url_for("hello"))
     return render_template("education.html",title="Education",form=form)
 
@@ -143,7 +143,7 @@ def  postexperience():
 def  postprojects():
     form = userpro()
     if form.validate_on_submit():
-        pro = projects(projectname=form.projectname.data,startpro=form.startpro.data,endpro=form.endpro.data,description=form.description.data,url=form.url.data)
+        pro = projects(projectname=form.projectname.data,startpro=form.startpro.data,endpro=form.endpro.data,description=form.description.data,url=form.url.data,pro=current_user)
         db.session.add(pro)
         db.session.commit()
         return redirect(url_for("hello"))
@@ -173,7 +173,7 @@ def resumeview():
     #print(exp.company)
     #print(edu.name)
 
-    return render_template("resume.html",edu=edu,exp=exp)
+    return render_template("resume.html",edu=edu,exp=exp,pro=pro)
 
 
 

@@ -20,6 +20,13 @@ class user(db.Model,UserMixin):
 
     def __retr__(self):
         return  "User {}  Email {}  Image {}".format(self.username,self.email,self.image_file)
+    
+
+
+
+#class userdetails(db.Model):
+  #  id = db.Column(db.Integer, primary_key=True)
+
 
 class posts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
