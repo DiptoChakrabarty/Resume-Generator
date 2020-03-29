@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed,FileField
-from wtforms import StringField, PasswordField,SubmitField,BooleanField,TextAreaField,DateField
+from wtforms import StringField, PasswordField,SubmitField,BooleanField,TextAreaField
+from wtforms.fields.html5  import DateField
 from wtforms.validators import DataRequired,Length,Email,EqualTo,ValidationError
 from resume.models import user,posts
 from flask_login import current_user
@@ -72,9 +73,9 @@ class posting(FlaskForm):
 class useredu(FlaskForm):
     college = StringField("College",
         validators=[DataRequired(),Length(min=5)])
-    start = DateField('Start Date', format='%m/%d/%Y', 
+    start = DateField('Start Date', format='%Y-%m-%d', 
          validators=[DataRequired()])
-    end  = DateField('End Date', format='%m/%d/%Y', 
+    end  = DateField('End Date', format='%Y-%m-%d', 
         validators=[DataRequired()])
     cgpa  = StringField("CGPA",
         validators=[DataRequired()])  
@@ -87,9 +88,9 @@ class userexp(FlaskForm):
         validators=[DataRequired(),Length(min=5)])
     position = StringField("Position",
         validators=[DataRequired(),Length(min=5)])
-    startexp = DateField('Start Date', format='%m/%d/%Y', 
+    startexp = DateField('Start Date', format='%Y-%m-%d', 
          validators=[DataRequired()])
-    endexp  = DateField('End Date', format='%m/%d/%Y', 
+    endexp  = DateField('End Date', format='%Y-%m-%d', 
         validators=[DataRequired()])
     content = TextAreaField("Description",
         validators=[DataRequired(),Length(min=15)])
@@ -99,9 +100,9 @@ class userexp(FlaskForm):
 class userpro(FlaskForm):
     projectname = StringField("Project Name",
         validators=[DataRequired(),Length(min=3)])
-    startpro = DateField('Start Date', format='%m/%d/%Y', 
+    startpro = DateField('Start Date', format='%Y-%m-%d', 
          validators=[DataRequired()])
-    endpro  = DateField('End Date', format='%m/%d/%Y', 
+    endpro  = DateField('End Date', format='%Y-%m-%d', 
         validators=[DataRequired()])
     description = TextAreaField("Description",
         validators=[Length(min=10)])
@@ -131,7 +132,7 @@ class usersk(FlaskForm):
     skillname = StringField("Skill Name",
         validators=[DataRequired(),Length(min=3)])
     
-    submit = SubmitField("Add Another skills")
+    submit = SubmitField("Add Another skill")
 
     
     
