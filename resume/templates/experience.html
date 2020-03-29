@@ -5,9 +5,10 @@
 <div class="content-section">
     <form method="POST" action="">
         {{ form.hidden_tag() }}
-        <fieldset class="form-group">
+        <fieldset class="form-group" id="cloneunder">
             <legend class="border-bottom mb-4">Make Resume</legend>
             <h1>Work Experience</h1>
+            <div id="skillclass">
 
             <div class="form-group">
                 {{ form.company.label(class="form-control-label") }}
@@ -83,6 +84,7 @@
                 {{ form.content(class="form-control form-control-lg") }}
                 {% endif %}
             </div>
+        </div>
 
         </fieldset>
         <div class="form-group">
@@ -90,7 +92,27 @@
         </div>
 </form>
 
+
+       
+
 </div>
+
+{% if expadded %}
+<div class="content-section">
+  <h4>Experience Added</h4>
+        
+  {%  for experience in expadded %}
+  <article>
+      <h2>{{ experience.company }}</h2>
+      <p class="subDetails">{{ experience.startexp }} - Present</p>
+      <p>{{ experience.content }}</p>
+  </article>
+  {% endfor %}
+       
+    
+
+</div>
+{% endif %}
 
 
 

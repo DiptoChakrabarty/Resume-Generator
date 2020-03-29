@@ -78,6 +78,26 @@
 </div>
 
 
+{% if eduadded %}
+<div class="content-section">
+  <h4>Education Added</h4>
+        
+            {% for education in eduadded %}
+        <article>
+            <h2>{{ education.name }}</h2>
+            <p class="subDetails">Student</p>
+            <p class="subDetails"> {{ education.start }} - {{ education.end }}</p>
+            <h3>CGPA - {{ education.cgpa }}</h3>
+        </article>
+    
+        {% endfor %}
+       
+    
+
+</div>
+{% endif %}
+
+
 
 
 {%  endblock content  %}

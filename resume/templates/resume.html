@@ -61,7 +61,7 @@
 				<article>
 					<h2>{{ education.name }}</h2>
 					<p class="subDetails">Student</p>
-					<p class="subDetails"> {{ edu.start }} - {{ edu.end }}</p>
+					<p class="subDetails"> {{ education.start }} - {{ education.end }}</p>
 					<h3>CGPA - {{ education.cgpa }}</h3>
 				</article>
 			
@@ -81,7 +81,7 @@
 				{%  for experience in exp %}
 				<article>
 					<h2>{{ experience.company }}</h2>
-					<p class="subDetails">{{ exp.startexp }} - Present</p>
+					<p class="subDetails">{{ experience.startexp }} - {{ experience.endexp }}</p>
 					<p>{{ experience.content }}</p>
 				</article>
 				{% endfor %}

@@ -93,7 +93,29 @@
     </div>
 </form>
 
+                 
 </div>
+
+{% if proadded %}
+<div class="content-section">
+<h4>Projects Added</h4>
+        
+{% for project in proadded %}
+<article>
+    <h2>{{ project.projectname }}</h2>
+    <p class="subDetails">{{ project.startpro }} - {{ project.endpro }} </p>
+    <p>{{ project.description }}</p>
+    <p>{{ project.url }}</p>
+</article>
+
+{% endfor %}
+    
+
+</div>
+{% endif %}
+
+
+
 
 
 

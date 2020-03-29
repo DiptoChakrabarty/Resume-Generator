@@ -106,38 +106,41 @@ def  post():
 @login_required
 def  postedu():
     form = useredu()
+    eduadded = education.query.filter_by(edu=current_user).all()
     if form.validate_on_submit():
         edu = education(name=form.college.data,start=form.start.data,end=form.end.data,cgpa=form.cgpa.data,edu=current_user)
         print(form.college.data,form.start.data,form.end.data)
         db.session.add(edu)
         db.session.commit()
         #print(form.company.data,form.position.data)
-        return redirect(url_for("postexperience"))
-    return render_template("education.html",title="Education",form=form)
+        return redirect(url_for("postedu"))
+    return render_template("education.html",title="Education",form=form,eduadded=eduadded)
 
 
 @app.route("/resume/new/experience",methods=['GET','POST'])
 @login_required
 def  postexperience():
     form = userexp()
+    expadded = experience.query.filter_by(exp=current_user).all()
     if form.validate_on_submit():
         exp = experience(company=form.company.data,position=form.position.data,startexp=form.startexp.data,endexp=form.endexp.data,content=form.content.data,exp=current_user)
         db.session.add(exp)
         db.session.commit()
-        return redirect(url_for("postprojects"))
-    return render_template("experience.html",title="Experience",form=form)
+        return redirect(url_for("postexperience"))
+    return render_template("experience.html",title="Experience",form=form,expadded=expadded)
 
 
 @app.route("/resume/new/projects",methods=['GET','POST'])
 @login_required
 def  postprojects():
     form = userpro()
+    proadded = projects.query.filter_by(pro=current_user).all()
     if form.validate_on_submit():
         pro = projects(projectname=form.projectname.data,startpro=form.startpro.data,endpro=form.endpro.data,description=form.description.data,url=form.url.data,pro=current_user)
         db.session.add(pro)
         db.session.commit()
-        return redirect(url_for("postskills"))
-    return render_template("projects.html",title="Projects",form=form)
+        return redirect(url_for("postprojects"))
+    return render_template("projects.html",title="Projects",form=form,proadded=proadded)
 
 @app.route("/resume/new/skills",methods=['GET','POST'])
 @login_required
