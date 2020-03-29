@@ -5,9 +5,10 @@
 <div class="content-section">
     <form method="POST" action="">
         {{ form.hidden_tag() }}
-        <fieldset class="form-group">
+        <fieldset class="form-group" id="cloneunder">
             <legend class="border-bottom mb-4">Make Resume</legend>
             <h1>Education Details</h1>
+            <div  id="skillclass">
             <div class="form-group">
                 {{ form.college.label(class="form-control-label") }}
 
@@ -67,7 +68,7 @@
                 {{ form.cgpa(class="form-control form-control-lg") }}
                 {% endif %}
             </div>
-
+        </div>
         </fieldset>
         <div class="form-group">
             {{ form.submit(class="btn btn-outline-info") }}

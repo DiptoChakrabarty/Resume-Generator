@@ -3,7 +3,7 @@
 
 
 <div class="content-section">
-    <input type="button" value="add skill"  id="add" onclick=createNewElement()  style="float: right;">
+   
     <form method="POST" action="">
         {{ form.hidden_tag() }}
         <fieldset class="form-group" id="cloneunder">
@@ -27,16 +27,28 @@
 
             
 
-            <p id="newElementId"></p>
+            
             
             
             </fieldset>
             <div class="form-group">
                 {{ form.submit(class="btn btn-outline-info") }}
             </div>
+
     </form>
 
 </div>
+
+{% if skillsadded %}
+    <div class="content-section">
+        <h4>Skills Added </h4>
+        {% for skills in skillsadded %}
+        <ul>
+            <li> {{ skills.skillname }} </li>
+        </ul>
+        {% endfor %}
+    </div>
+{% endif %}
 
 <script type="text/JavaScript">
     function createNewElement() {

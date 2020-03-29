@@ -154,13 +154,16 @@ def  postprojects():
 @login_required
 def postskills():
     form = usersk()
+    skillsadded = skills.query.filter_by(skill=current_user).all()
     if form.validate_on_submit():
         sk = skills(skillname=form.skillname.data,skill=current_user)
-        db.session.add(pro)
+        db.session.add(sk)
         db.session.commit()
-        return redirect(url_for("post"))
-    return render_template("skills.html",title="Skills",form=form)
+        return redirect(url_for("postskills"))
+        #print(form.skillname.data)
 
+    return render_template("skills.html",title="Skills",form=form,skillsadded=skillsadded)
+       
 
 
 #### End Separation ####
