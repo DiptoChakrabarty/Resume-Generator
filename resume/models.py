@@ -36,9 +36,9 @@ class user(db.Model,UserMixin):
 class userdetails(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20),unique=True,nullable=False)
-    email = db.Column(db.String(120),unique=True,nullable=False)
-    designation = db.Column(db.String(120),unique=True,nullable=False)
-    phoneno =  db.Column(db.String(15),unique=True,nullable=False)
+    email = db.Column(db.String(120),nullable=False)
+    designation = db.Column(db.String(120),nullable=False)
+    phoneno =  db.Column(db.String(15),nullable=False)
     profile = db.Column(db.Text,nullable=False)
     user_id= db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False)
 
