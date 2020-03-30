@@ -7,19 +7,27 @@
     <div>
         <article class="container">
             <p class="article-content">Welcome to Resume Generator , create stunning resume </p>
-            <p class="article-content"> easily and fast , login  to create your resume now  </p>
+            <p class="article-content"> easily and fast , login  and  create your resume now  </p>
         </article>
 
         {% if current_user.is_authenticated %}
         <a href="/acoounts" class="btn btn-outline-warning" style="float: left;">Update Account details Here</a>
-        <a href="/resume/new" class="btn btn-outline-danger" style="float: right;">Create Resume</a>
+        <br>
+        <br>
+        <br>
+        <a href="/resume/new" class="btn btn-outline-danger" style="float: left;">Create Resume</a>
+        <br>
+        <br>
+        <br>
+        <a href="/download" class="btn btn-outline-success" style="float: center;">Generate PDF of Resume</a>
+        
+
 
         
         {% else %}
         <a href="/login" class="btn btn-outline-success" style="float: left;">Login to Continue</a>
         <a href="/register" class="btn btn-outline-info" style="float: right;">Register Here </a>
-        <a href="/download" class="btn btn-outline-danger" style="float: center;">Generate PDF</a>
-
+        
         
         {% endif %}
         
