@@ -1,0 +1,7 @@
+Flask
+flask_sqlalchemy
+flask_bcrypt
+flask_login
+Pillow
+flask_wtf
+pdfkit

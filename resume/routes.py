@@ -1,10 +1,11 @@
-from flask import Flask,render_template,url_for,flash,redirect,request,abort
+from flask import Flask,make_response,render_template,url_for,flash,redirect,request,abort
 from resume.forms import Reg,Login,account,posting,resumebuilder,useredu,userexp,userpro,usersk,achieve
 from resume.models import user,posts,education,experience,projects,userdetails,skills,achievements
 from resume import app,db, bcrypt
 from flask_login import login_user,current_user,logout_user,login_required
 import secrets,os
 from PIL import Image
+import pdfkit
 
 title = "Posts"
 
@@ -180,6 +181,8 @@ def postacheive():
 
 
 ### Generate Resume
+
+
 @app.route("/resume",methods=["GET","POST"])
 @login_required
 def resumeview():
@@ -189,12 +192,37 @@ def resumeview():
     usr = userdetails.query.filter_by(details=current_user).first()
     skillsadded = skills.query.filter_by(skill=current_user).all()
     achmade = achievements.query.filter_by(ach=current_user).all()
+    
 
-    #print(exp.company)
-    #print(edu.name)
     image_file = url_for('static',filename='profiles/'+ current_user.image_file)
 
     return render_template("resume.html",edu=edu,exp=exp,pro=pro,usr=usr,sk=skillsadded,achmade=achmade,image_file=image_file)
+
+
+
+
+@app.route("/download",methods=["GET"])
+@login_required
+def downloadpdf():
+    edu = education.query.filter_by(edu=current_user).all()
+    exp = experience.query.filter_by(exp=current_user).all()
+    pro = projects.query.filter_by(pro=current_user).all()
+    usr = userdetails.query.filter_by(details=current_user).first()
+    skillsadded = skills.query.filter_by(skill=current_user).all()
+    achmade = achievements.query.filter_by(ach=current_user).all()
+
+    image_file = url_for('static',filename='profiles/'+ current_user.image_file)
+    css = ["resume/static/resume.css","resume/static/main.css"]
+    rendered = render_template("resume.html",edu=edu,exp=exp,pro=pro,usr=usr,sk=skillsadded,achmade=achmade,image_file=image_file)
+    pdf =pdfkit.from_string(rendered,False,css=css)
+
+    response = make_response(pdf)
+    response.headers["Content-Type"] = "application/pdf"
+    response.headers["Content-Disposition"] = "attachement; filename=resume.pdf"
+
+    return response
+    
+
 
 
 ### Updating and deleting

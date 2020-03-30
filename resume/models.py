@@ -48,7 +48,7 @@ class userdetails(db.Model):
 class posts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100),nullable=False)
-    date = db.Column(db.DateTime,nullable=False,default=datetime.utcnow())
+    date = db.Column(db.DateTime,nullable=False,default=datetime.today())
     content = db.Column(db.Text,nullable=False)
     user_id= db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False)
 
@@ -58,8 +58,8 @@ class posts(db.Model):
 class education(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100),nullable=False)
-    start = db.Column(db.DateTime,nullable=False,default=datetime.utcnow())
-    end = db.Column(db.DateTime,nullable=False,default=datetime.utcnow())
+    start = db.Column(db.DateTime,nullable=False,default=datetime.today())
+    end = db.Column(db.DateTime,nullable=False,default=datetime.today())
     cgpa = db.Column(db.Integer,nullable=False)
     user_id= db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False)
 
@@ -74,8 +74,8 @@ class experience(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     company = db.Column(db.String(100),nullable=False)
     position = db.Column(db.String(100),nullable=False)
-    startexp = db.Column(db.DateTime,nullable=False,default=datetime.utcnow())
-    endexp = db.Column(db.DateTime,nullable=False,default=datetime.utcnow())
+    startexp = db.Column(db.DateTime,nullable=False,default=datetime.today())
+    endexp = db.Column(db.DateTime,nullable=False,default=datetime.today())
     content = db.Column(db.Text,nullable=False)
     user_id= db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False)
 
@@ -87,8 +87,8 @@ class experience(db.Model):
 class projects(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     projectname = db.Column(db.String(100),nullable=False)
-    startpro = db.Column(db.DateTime,nullable=False,default=datetime.utcnow())
-    endpro = db.Column(db.DateTime,nullable=False,default=datetime.utcnow())
+    startpro = db.Column(db.DateTime,nullable=False,default=datetime.today())
+    endpro = db.Column(db.DateTime,nullable=False,default=datetime.today())
     description = db.Column(db.Text,default=None)
     url = db.Column(db.String(100),default=None)
     user_id= db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False)
