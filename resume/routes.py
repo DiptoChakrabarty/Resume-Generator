@@ -274,7 +274,7 @@ def update_edu(education_id):
     return render_template("education.html",title="Update Education",form=form)
 
 @app.route("/resume/new/education/<int:education_id>/delete",methods=["GET","POST"])
-def delete_edu(acheive_id):
+def delete_edu(education_id):
     eduview = education.query.get_or_404(education_id)
 
     db.session.delete(eduview)
