@@ -5,3 +5,4 @@ flask_login
 Pillow
 flask_wtf
 pdfkit
+email_validator
