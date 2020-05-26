@@ -158,7 +158,7 @@ class resetpassword(FlaskForm):
         validators=[DataRequired()])
     confirm_password = PasswordField('Confirm Password',
         validators=[DataRequired(),EqualTo('password')])
-    submit = SubmitField('Sign Up')
+    submit = SubmitField('Change Password')
 
 
 

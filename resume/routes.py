@@ -1,5 +1,5 @@
 from flask import Flask,make_response,render_template,url_for,flash,redirect,request,abort
-from resume.forms import Reg,Login,account,posting,resumebuilder,useredu,userexp,userpro,usersk,achieve
+from resume.forms import Reg,Login,account,posting,resumebuilder,useredu,userexp,userpro,usersk,achieve,requestresetform,resetpassword
 from resume.models import user,education,experience,projects,userdetails,skills,achievements
 from resume import app,db, bcrypt
 from flask_login import login_user,current_user,logout_user,login_required
@@ -348,7 +348,22 @@ def delete_pro(project_id):
     
    
 
-    
+####       Reset Password  ####
+@app.route("/reset_account",methods=["GET","POST"])
+def request_reset():
+    if current_user.is_authenticated:
+        return redirect(url_for('hello'))
+    form = requestresetform()
+    return render_template("reset.html",title="Reset Request Form",form=form)
+
+@app.route("/reset_account/<token>",methods=["GET","POST"])
+def token_reset(token):
+    if current_user.is_authenticated:
+        return redirect(url_for('hello'))
+    user_id = user.verify_token(token)
+    if user_id is None:
+        flash("Token is Invalid or Expired","warning")
+        return redirect(url_for('request_reset'))
 
 
 
