@@ -1,8 +1,9 @@
 from flask import Flask,make_response,render_template,url_for,flash,redirect,request,abort
 from resume.forms import Reg,Login,account,posting,resumebuilder,useredu,userexp,userpro,usersk,achieve,requestresetform,resetpassword
 from resume.models import user,education,experience,projects,userdetails,skills,achievements
-from resume import app,db, bcrypt
+from resume import app,db, bcrypt , mail
 from flask_login import login_user,current_user,logout_user,login_required
+from flask_mail import Message
 import secrets,os
 from PIL import Image
 import pdfkit
@@ -349,11 +350,23 @@ def delete_pro(project_id):
    
 
 ####       Reset Password  ####
+def send_reset_pass():
+    token = user.reset_token()
+    msg= Message("Password Reset Request",
+    sender="noreply@gmail.com",recipients=[user.email])
+
+
 @app.route("/reset_account",methods=["GET","POST"])
 def request_reset():
     if current_user.is_authenticated:
         return redirect(url_for('hello'))
     form = requestresetform()
+    if form.validate_on_submit():
+        req_user = user.query.filter_by(email=form.email.data).first()
+        send_reset_pass(req_user)
+        flash("Email has been sent with instructions to Reset Password")
+        return redirect(url_for("hello"))
+
     return render_template("reset.html",title="Reset Request Form",form=form)
 
 @app.route("/reset_account/<token>",methods=["GET","POST"])
@@ -364,6 +377,8 @@ def token_reset(token):
     if user_id is None:
         flash("Token is Invalid or Expired","warning")
         return redirect(url_for('request_reset'))
+    form = resetpassword()
+    return render_template("reset_password.html",title="Reset Password",form=form)
 
 
 
