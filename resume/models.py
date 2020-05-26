@@ -1,6 +1,8 @@
-from resume import db,login_manager
+from resume import db,login_manager,app
 from flask_login import UserMixin
 from datetime import datetime
+from itsdangerous import TimedJSONWebSignatureSerializer as serializer
+
 
 @login_manager.user_loader
 def load_user(id):
@@ -29,6 +31,9 @@ class user(db.Model,UserMixin):
     def __retr__(self):
         return  "User {}  Email {}  Image {}".format(self.username,self.email,self.image_file)
     
+    def reset_token(self,expires_sec=1800):
+        s = serializer(app.config['SECRET_KEY'],expires_sec)
+        return s.dumps({"user_id": self.id}).decode("utf-8")
 
 
 
