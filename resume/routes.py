@@ -355,6 +355,12 @@ def send_reset_pass():
     msg= Message("Password Reset Request",
     sender="noreply@gmail.com",recipients=[user.email])
 
+    msg.body = """ To reset your password , visit the following link:
+    { url_for('token_reset',token=token,_external=True)}
+    
+    If you did not make this request then ignore this message
+    """
+
 
 @app.route("/reset_account",methods=["GET","POST"])
 def request_reset():
@@ -373,11 +379,17 @@ def request_reset():
 def token_reset(token):
     if current_user.is_authenticated:
         return redirect(url_for('hello'))
-    user_id = user.verify_token(token)
-    if user_id is None:
+    user_req = user.verify_token(token)
+    if user_req is None:
         flash("Token is Invalid or Expired","warning")
         return redirect(url_for('request_reset'))
     form = resetpassword()
+    if form.validate_on_submit():
+        hashed = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user_req.password = hashed
+        db.session.commit()
+        flash(f'Password Updated  {form.username.data}!','success')
+        return redirect(url_for('login'))
     return render_template("reset_password.html",title="Reset Password",form=form)
 
 
