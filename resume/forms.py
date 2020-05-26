@@ -143,6 +143,24 @@ class achieve(FlaskForm):
     
     submit = SubmitField("Add")
 
+class requestresetform(FlaskForm):
+    email = StringField("Email",
+        validators=[DataRequired(),Length(min=5)])
+    submit = SubmitField("Reset Password")
+
+    def validate_email(self,email):
+        user_email = user.query.filter_by(email=email.data).first()
+        if user_email is None:
+            raise ValidationError("The email is unverified please register using this email")
+
+class resetpassword(FlaskForm):
+    password = PasswordField('Password',
+        validators=[DataRequired()])
+    confirm_password = PasswordField('Confirm Password',
+        validators=[DataRequired(),EqualTo('password')])
+    submit = SubmitField('Sign Up')
+
+
 
 
     
