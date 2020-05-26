@@ -13,7 +13,6 @@ class user(db.Model,UserMixin):
     email = db.Column(db.String(120),unique=True,nullable=False)
     image_file = db.Column(db.String(20),nullable=False,default='default.jpg')
     password =  db.Column(db.String(60),nullable=False)
-    posts= db.relationship('posts',backref='author',lazy=True)
     #education
     education = db.relationship('education',backref='edu',lazy=True)
     #experience
@@ -35,7 +34,7 @@ class user(db.Model,UserMixin):
 
 class userdetails(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(20),unique=True,nullable=False)
+    name = db.Column(db.String(20),nullable=False)
     email = db.Column(db.String(120),nullable=False)
     designation = db.Column(db.String(120),nullable=False)
     phoneno =  db.Column(db.String(15),nullable=False)
@@ -45,15 +44,7 @@ class userdetails(db.Model):
 
 
 
-class posts(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(100),nullable=False)
-    date = db.Column(db.DateTime,nullable=False,default=datetime.today())
-    content = db.Column(db.Text,nullable=False)
-    user_id= db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False)
 
-    def __retr__(self):
-        return  "Title {}  Date {}  ".format(self.title,self.date)
 
 class education(db.Model):
     id = db.Column(db.Integer, primary_key=True)

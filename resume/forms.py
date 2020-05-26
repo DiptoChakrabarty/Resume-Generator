@@ -3,7 +3,7 @@ from flask_wtf.file import FileAllowed,FileField
 from wtforms import StringField, PasswordField,SubmitField,BooleanField,TextAreaField
 from wtforms.fields.html5  import DateField
 from wtforms.validators import DataRequired,Length,Email,EqualTo,ValidationError
-from resume.models import user,posts
+from resume.models import user
 from flask_login import current_user
 
 class Reg(FlaskForm):

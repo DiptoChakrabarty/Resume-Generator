@@ -1,6 +1,6 @@
 from flask import Flask,make_response,render_template,url_for,flash,redirect,request,abort
 from resume.forms import Reg,Login,account,posting,resumebuilder,useredu,userexp,userpro,usersk,achieve
-from resume.models import user,posts,education,experience,projects,userdetails,skills,achievements
+from resume.models import user,education,experience,projects,userdetails,skills,achievements
 from resume import app,db, bcrypt
 from flask_login import login_user,current_user,logout_user,login_required
 import secrets,os
