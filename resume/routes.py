@@ -350,7 +350,7 @@ def delete_pro(project_id):
    
 
 ####       Reset Password  ####
-def send_reset_pass():
+def send_reset_pass(user):
     token = user.reset_token()
     msg= Message("Password Reset Request",
     sender="noreply@gmail.com",recipients=[user.email])
@@ -360,6 +360,8 @@ def send_reset_pass():
     
     If you did not make this request then ignore this message
     """
+    
+    mail.send(msg)
 
 
 @app.route("/reset_account",methods=["GET","POST"])
