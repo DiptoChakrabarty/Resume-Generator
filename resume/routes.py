@@ -393,7 +393,7 @@ def token_reset(token):
         hashed = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         user_req.password = hashed
         db.session.commit()
-        flash(f'Password Updated  {form.username.data}!','success')
+        flash(f'Password Updated ','success')
         return redirect(url_for('login'))
     return render_template("reset_password.html",title="Reset Password",form=form)
 
