@@ -7,6 +7,8 @@ from flask_mail import Message
 import secrets,os
 from PIL import Image
 import pdfkit
+from dotenv import load_dotenv
+load_dotenv()
 
 title = "Posts"
 
@@ -351,15 +353,16 @@ def delete_pro(project_id):
 
 ####       Reset Password  ####
 def send_reset_pass(user):
+    email_id= os.environ["MAIL_USERNAME"]
     token = user.reset_token()
     msg= Message("Password Reset Request",
-    sender="noreply@gmail.com",recipients=[user.email])
+    sender="{}".format(email_id),recipients=[user.email])
 
-    msg.body = """ To reset your password , visit the following link:
-    { url_for('token_reset',token=token,_external=True)}
+    msg.body = f''' To reset your password , visit the following link:
+    { url_for('token_reset',token=token,_external=True) }
     
     If you did not make this request then ignore this message
-    """
+    '''
     
     mail.send(msg)
 
