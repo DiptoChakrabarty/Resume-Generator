@@ -26,6 +26,18 @@ This section should list any major frameworks that you built your project using.
 * sqlalchemy
 * Python
 
+### Images
+
+    <h3>Add Your Details</h3>
+    <img src="images/projects.png">
+
+    <h3>Delete Them<h3>
+    <img src="images/delete.png">
+
+    <h3>Update Them<h3>
+    <img src="images/Update.png">
+
+
 
 ### Installation
 
