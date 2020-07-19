@@ -11,14 +11,12 @@
 
 ### Images
 
-    <h3>Add Your Details</h3>
-    <img src="images/projects.png">
+   
+    ![](images/projects.png)
 
-    <h3>Delete Them<h3>
-    <img src="images/delete.png">
-
-    <h3>Update Them<h3>
-    <img src="images/Update.png">
+    ![](images/delete.png)
+    
+    ![](images/Update.png)
 
 
 ## About The Project
