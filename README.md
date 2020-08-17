@@ -98,7 +98,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 
-- Your Name - Dipto Chakrabarty
+- My Name - Dipto Chakrabarty
  
 - You can contact me at diptochuck123@gmail.com
 
