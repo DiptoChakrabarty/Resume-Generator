@@ -59,13 +59,17 @@ pip install -r requirements.txt
 ```sh
     rm resume/site/db
 ```
-5. In website directory setup db
+5. Setup Env Variables
 ```sh
-    python3
-    from resume import db
-    db.create_all()
-    ctrl+d
+  create file .env inside folder resume
+
+  Add the following 
+
+  MAIL_USERNAME="{{ your gmail username }}"
+  PASSWORD="{{ your password }}"
+
 ```
+
 6. Run webserver
 ```sh
     python3 app.py
