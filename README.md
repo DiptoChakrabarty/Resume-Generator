@@ -45,11 +45,11 @@ This section should list any major frameworks that you built your project using.
 
 1. Clone the repo
 ```sh
-git clone https://github.com/DiptoChakrabarty/website
+git clone https://github.com/DiptoChakrabarty/Resume-Generator
 ```
 2. Enter Directory
 ```sh
-cd website
+cd resume
 ```
 3. Install all packages
 ```sh
@@ -57,17 +57,16 @@ pip install -r requirements.txt
 ```
 4. Remove site.db file to start fresh database
 ```sh
-    rm resume/site/db
+    rm resume/site.db
 ```
 5. Setup Env Variables
-```sh
+
   create file .env inside folder resume
 
   Add the following 
-
+```sh
   MAIL_USERNAME="{{ your gmail username }}"
   PASSWORD="{{ your password }}"
-
 ```
 
 6. Run webserver
