@@ -49,7 +49,7 @@ git clone https://github.com/DiptoChakrabarty/Resume-Generator
 ```
 2. Enter Directory
 ```sh
-cd resume
+cd Resume-Generator
 ```
 3. Install all packages
 ```sh
