@@ -1,6 +1,6 @@
 from flask import Flask,request,jsonify
 from datetime import datetime
-
+import os
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
@@ -10,7 +10,7 @@ from pymongo import MongoClient
 
 app =  Flask(__name__)
 
-app.config['SECRET_KEY'] = 'e23739c67eade607c64f90c3ebb479ca' 
+app.config['SECRET_KEY'] = os.urandom(32).hex()
 '''app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 
 db = SQLAlchemy(app)'''
