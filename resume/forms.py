@@ -77,6 +77,11 @@ class useredu(FlaskForm):
          validators=[DataRequired()])
     end  = DateField('End Date', format='%Y-%m-%d', 
         validators=[DataRequired()])
+
+    def validate_end(form, field):
+    	if field.data < form.start.data:
+    		raise ValidationError("End date cannot be earlier than start date.")
+
     cgpa  = StringField("CGPA",
         validators=[DataRequired()])  
     submit = SubmitField("Add Education")
@@ -92,6 +97,11 @@ class userexp(FlaskForm):
          validators=[DataRequired()])
     endexp  = DateField('End Date', format='%Y-%m-%d', 
         validators=[DataRequired()])
+
+    def validate_endexp(form, field):
+    	if field.data < form.startexp.data:
+    		raise ValidationError("End date cannot be earlier than start date.")
+
     content = TextAreaField("Description",
         validators=[DataRequired(),Length(min=15)])
     submit = SubmitField("Add Work Experience")
@@ -104,6 +114,11 @@ class userpro(FlaskForm):
          validators=[DataRequired()])
     endpro  = DateField('End Date', format='%Y-%m-%d', 
         validators=[DataRequired()])
+
+    def validate_endpro(form, field):
+    	if field.data < form.startpro.data:
+    		raise ValidationError("End date cannot be earlier than start date.")
+    		
     description = TextAreaField("Description",
         validators=[Length(min=10)])
     url = StringField("Project Url",
@@ -162,12 +177,6 @@ class resetpassword(FlaskForm):
 
 
 
-
-    
-    
- 
-
-    
 
 
      
