@@ -57,7 +57,7 @@ pip install -r requirements.txt
 ```
 4. Remove site.db file to start fresh database
 ```sh
-    rm resume/site.db
+rm resume/site.db
 ```
 5. Setup Env Variables
 
@@ -65,13 +65,13 @@ pip install -r requirements.txt
 
   Add the following 
 ```sh
-  MAIL_USERNAME="{{ your gmail username }}"
-  PASSWORD="{{ your password }}"
+MAIL_USERNAME="{{ your gmail username }}"
+PASSWORD="{{ your password }}"
 ```
 
 6. Run webserver
 ```sh
-    python3 app.py
+python3 app.py
 ```
 
 # Contributing

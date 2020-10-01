@@ -10,7 +10,8 @@ from pymongo import MongoClient
 
 app =  Flask(__name__)
 
-app.config['SECRET_KEY'] = os.urandom(32).hex()
+app.config['SECRET_KEY'] = 'e23739c67eade607c64f90c3ebb479ca' 
+
 '''app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 
 db = SQLAlchemy(app)'''
