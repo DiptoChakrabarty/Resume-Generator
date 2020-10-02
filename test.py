@@ -31,9 +31,11 @@ def register():
     password = data["password"]
     email = data["email"]
     hashed = bcrypt.generate_password_hash(password).decode('utf-8')
+    
     '''new_user = user(username=form.username.data,email=form.email.data,password=hashed)
     db.session.add(new_user)
     db.session.commit()'''
+    
     users.insert({
         "username": username,
         "email": email,
@@ -43,7 +45,9 @@ def register():
         "status": 200,
         "msg": "user made"
     }
+    
     #flash(f'Account Created for {fousername}!','success')
+    
     return jsonify(ret)
 
 
