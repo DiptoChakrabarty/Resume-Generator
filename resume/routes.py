@@ -30,7 +30,7 @@ def register():
         db.session.add(new_user)
         db.session.commit()
         flash(f'Account Created for {form.username.data}!','success')
-        return redirect(url_for('login'),code=201)
+        return redirect(url_for('login'),code=302)
     return render_template('register.html',title='Register',form=form)
 
 @app.route("/login",methods=['GET','POST'])
@@ -44,7 +44,7 @@ def login():
             login_user(logged,remember=form.remember.data)
             next_page = request.args.get('next')            
             if next_page:
-                return redirect(next_page,code=200)
+                return redirect(next_page,code=302)
             else:
                 return redirect(url_for('hello'),code=301)
         else:
@@ -56,7 +56,7 @@ def login():
 @app.route("/logout")
 def logout():
     logout_user()
-    return redirect(url_for("hello"),code=200)
+    return redirect(url_for("hello"),code=302)
 
 def save_picture(form_picture):
     random_hex = secrets.token_hex(8)
@@ -85,7 +85,7 @@ def accounts():
         current_user.email = form.new_email.data  # Update current user values
         db.session.commit()
         flash("Your Account has been updated","success")
-        return redirect(url_for("accounts"),code=202)
+        return redirect(url_for("accounts"),code=301)
     elif request.method == 'GET':
         form.new_username.data = current_user.username
         form.new_email.data = current_user.email
@@ -102,7 +102,7 @@ def  post():
         db.session.add(usr)
         db.session.commit()
         print(form.name.data,form.email.data,form.designation.data)
-        return redirect(url_for("postedu"),code=201)
+        return redirect(url_for("postedu"),code=301)
     return render_template("posts.html",title="New Resume",form=form)
 
 #### Separation#####
@@ -117,7 +117,7 @@ def  postedu():
         db.session.add(edu)
         db.session.commit()
         #print(form.company.data,form.position.data)
-        return redirect(url_for("postedu"),code=201)
+        return redirect(url_for("postedu"),code=301)
     return render_template("education.html",title="Education",form=form,eduadded=eduadded)
 
 
@@ -130,7 +130,7 @@ def  postexperience():
         exp = experience(company=form.company.data,position=form.position.data,startexp=form.startexp.data,endexp=form.endexp.data,content=form.content.data,exp=current_user)
         db.session.add(exp)
         db.session.commit()
-        return redirect(url_for("postexperience"),code=201)
+        return redirect(url_for("postexperience"),code=301)
     return render_template("experience.html",title="Experience",form=form,expadded=expadded)
 
 
@@ -143,7 +143,7 @@ def  postprojects():
         pro = projects(projectname=form.projectname.data,startpro=form.startpro.data,endpro=form.endpro.data,description=form.description.data,url=form.url.data,pro=current_user)
         db.session.add(pro)
         db.session.commit()
-        return redirect(url_for("postprojects"),code=201)
+        return redirect(url_for("postprojects"),code=301)
     return render_template("projects.html",title="Projects",form=form,proadded=proadded)
 
 @app.route("/resume/new/skills",methods=['GET','POST'])
@@ -155,7 +155,7 @@ def postskills():
         sk = skills(skillname=form.skillname.data,skill=current_user)
         db.session.add(sk)
         db.session.commit()
-        return redirect(url_for("postskills"),code=201)
+        return redirect(url_for("postskills"),code=301)
         #print(form.skillname.data)
 
     return render_template("skills.html",title="Skills",form=form,skillsadded=skillsadded)
@@ -170,7 +170,7 @@ def postacheive():
         acheive = achievements(achname=form.achname.data,achdesc=form.achname.data,ach=current_user)
         db.session.add(acheive)
         db.session.commit()
-        return redirect(url_for("postskills"),code=201)
+        return redirect(url_for("postskills"),code=301)
         #print(form.skillname.data)
 
     return render_template("acheive.html",title="Acheivements",form=form,achadded=achadded)
@@ -240,7 +240,7 @@ def update_acheive(acheive_id):
         achview.achdesc = form.achdesc.data
         db.session.commit()
         flash('Your acheivement has been updated!', 'success')
-        return redirect(url_for('postacheive'),code=202)
+        return redirect(url_for('postacheive'),code=301)
     elif request.method == 'GET':
         form.achname.data= achview.achname
         form.achdesc.data = achview.achdesc
@@ -253,7 +253,7 @@ def delete_acheive(acheive_id):
     db.session.delete(achview)
     db.session.commit()
     flash('Your post has been deleted!', 'success')
-    return redirect(url_for('postacheive'),code=200)
+    return redirect(url_for('postacheive'),code=301)
 
 #education
 @app.route("/resume/new/education/<int:education_id>/update",methods=["GET","POST"])
@@ -268,7 +268,7 @@ def update_edu(education_id):
         eduview.cgpa = form.cgpa.data
         db.session.commit()
         flash('Your education details have been updated!', 'success')
-        return redirect(url_for('postedu'),code=202)
+        return redirect(url_for('postedu'),code=301)
     elif request.method == 'GET':
         form.college.data= eduview.name
         form.start.data = eduview.start
@@ -283,7 +283,7 @@ def delete_edu(education_id):
     db.session.delete(eduview)
     db.session.commit()
     flash('Your education detail post has been deleted!', 'success')
-    return redirect(url_for('postedu'),code=200)
+    return redirect(url_for('postedu'),code=301)
 
 
 #Experience
@@ -299,7 +299,7 @@ def update_exp(experience_id):
         expview.content = form.content.data
         db.session.commit()
         flash('Your education details have been updated!', 'success')
-        return redirect(url_for('postexperience'),code=202)
+        return redirect(url_for('postexperience'),code=301)
     elif request.method == 'GET':
         form.company.data= expview.company
         form.startexp.data = expview.startexp
@@ -314,7 +314,7 @@ def delete_exp(experience_id):
     db.session.delete(expview)
     db.session.commit()
     flash('Your experience detail post has been deleted!', 'success')
-    return redirect(url_for('postexp'),code=200)
+    return redirect(url_for('postexp'),code=301)
     
 
 #Projects
@@ -331,7 +331,7 @@ def update_pro(project_id):
         proview.url  = form.url.data
         db.session.commit()
         flash('Your project details have been updated!', 'success')
-        return redirect(url_for('postprojects'),code=202)
+        return redirect(url_for('postprojects'),code=301)
     elif request.method == 'GET':
         form.projectname.data= proview.projectname
         form.startpro.data = proview.startpro
@@ -347,7 +347,7 @@ def delete_pro(project_id):
     db.session.delete(proview)
     db.session.commit()
     flash('Your project detail post has been deleted!', 'success')
-    return redirect(url_for('postprojects'),code=200)
+    return redirect(url_for('postprojects'),code=301)
     
    
 
@@ -376,23 +376,23 @@ def request_reset():
         req_user = user.query.filter_by(email=form.email.data).first()
         send_reset_pass(req_user)
         flash("Email has been sent with instructions to Reset Password")
-        return redirect(url_for("hello"),code=200)
+        return redirect(url_for("hello"),code=301)
 
     return render_template("reset.html",title="Reset Request Form",form=form)
 
 @app.route("/reset_account/<token>",methods=["GET","POST"])
 def token_reset(token):
     if current_user.is_authenticated:
-        return redirect(url_for('hello'),code=301)
+        return redirect(url_for('hello'),code=302)
     user_req = user.verify_token(token)
     if user_req is None:
         flash("Token is Invalid or Expired","warning")
-        return redirect(url_for('request_reset'),code=400)
+        return redirect(url_for('request_reset'),code=307)
     form = resetpassword()
     if form.validate_on_submit():
         hashed = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         user_req.password = hashed
         db.session.commit()
         flash(f'Password Updated ','success')
-        return redirect(url_for('login'),code=202)
+        return redirect(url_for('login'),code=302)
     return render_template("reset_password.html",title="Reset Password",form=form)
