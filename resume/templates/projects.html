@@ -2,15 +2,15 @@
 {% block content %}
 
 
-<div class="content-section">
+<div class="content-section" style="border-radius: 10px; box-shadow: 0px 10px 10px 0px rgba(38, 70, 83, 0.6); width: 42em; background-color: rgba(226, 234, 252, 0.5); padding: 30px;">
     <form method="POST" action="">
         {{ form.hidden_tag() }}
         <fieldset class="form-group" id="cloneunder">
-            <legend class="border-bottom mb-4">Make Resume</legend>
-            <h1>Projects</h1>
+            <legend class="border-bottom mb-4" style="color: #264653; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;"><strong>CREATE YOUR RESUME</strong></legend>
+            <h5 style="color: #264653; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;"><strong>PROJECTS</strong></h5>
             <div id="skillclass">
 
-        <div class="form-group">
+        <div class="form-group" style="color: #3d5a80; font-weight: 720; font-size: large;">
             {{ form.projectname.label(class="form-control-label") }}
 
             {% if form.projectname.errors %}
@@ -25,7 +25,7 @@
             {% endif %}
         </div>
 
-        <div class="form-group">
+        <div class="form-group" style="color: #3d5a80; font-weight: 720; font-size: large;">
             {{ form.startpro.label(class="form-control-label") }}
 
             {% if form.startpro.errors %}
@@ -40,7 +40,7 @@
             {% endif %}
         </div>
 
-        <div class="form-group">
+        <div class="form-group" style="color: #3d5a80; font-weight: 720; font-size: large;">
             {{ form.endpro.label(class="form-control-label") }}
 
             {% if form.endpro.errors %}
@@ -55,7 +55,7 @@
             {% endif %}
         </div>
 
-        <div class="form-group">
+        <div class="form-group" style="color: #3d5a80; font-weight: 720; font-size: large;">
             {{ form.description.label(class="form-control-label") }}
 
             {% if form.description.errors %}
@@ -71,7 +71,7 @@
         </div>
 
         
-        <div class="form-group">
+        <div class="form-group" >
             {{ form.url.label(class="form-control-label") }}
 
             {% if form.url.errors %}
@@ -88,9 +88,13 @@
     </div>
 
     </fieldset>
-    <a href="/resume/new/skills" class="btn btn-outline-success" style="float: right;">Go to Skills</a>
+    <a href="/resume/new/skills" class="btn" style="float: right; background-color: #264653; border-radius: 5px; border-color: white; color: white; font-weight: 700;"
+        onmouseover="this.style.background='green'",
+        onmouseout="this.style.background='#264653'">Go to Skills</a>
     <div class="form-group">
-        {{ form.submit(class="btn btn-outline-info") }}
+        {{ form.submit(class="btn", style="background-color: #264653; border-radius: 5px; border-color: white; color: white; font-weight: 700;",
+        onmouseover="this.style.background='#22223b'",
+        onmouseout="this.style.background='#264653'") }}
     </div>
 </form>
 
@@ -99,11 +103,11 @@
 
 {% if proadded and title == "Projects" %}
 <div class="content-section">
-<h4>Projects Added</h4>
+<h4 style="color: #264653; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;"><strong>PROJECT ADDED</strong></h4>
         
 {% for project in proadded %}
 <article>
-    <h2>{{ project.projectname }}</h2>
+    <h5 class="article-title">{{ project.projectname }}</h5>
     <p class="subDetails">{{ project.startpro }} - {{ project.endpro }} </p>
     <p>{{ project.description }}</p>
     <p>{{ project.url }}</p>

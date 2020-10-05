@@ -19,26 +19,26 @@
 </head>
 <body>
     <header class="site-header">
-      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top" style="background-color: #264653;">
         <div class="container">
-          <a class="navbar-brand mr-4" href="/">Resume Generator</a>
+          <a class="navbar-brand mr-4" href="/" style="font-size: 24px;"><strong>RESUME GENERATOR</strong></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarToggle">
             <div class="navbar-nav mr-auto">
-              <a class="nav-item nav-link" href="/">Home</a>
-              <a class="nav-item nav-link" href="/resume">View Resume</a>
+              <a class="nav-item nav-link" href="/" style="font-size: 16px;"><strong>Home</strong></a>
+              <a class="nav-item nav-link" href="/resume" style="font-size: 16px;"><strong>View Resume</strong></a>
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
               {% if current_user.is_authenticated %}
-              <a class="nav-item nav-link" href="/accounts">Account</a>
-              <a class="nav-item nav-link" href="/logout">Logout</a>
-              <a class="nav-item nav-link" href="/resume/new">Create</a>
+              <a class="nav-item nav-link" href="/accounts" style="font-size: 16px;"><strong>My Account</strong></a>
+              <a class="nav-item nav-link" href="/logout" style="font-size: 16px;"><strong>Logout</strong></a>
+              <a class="nav-item nav-link" href="/resume/new" style="font-size: 16px;"><strong>Create</strong></a>
               {% else %}
-              <a class="nav-item nav-link" href="/login">Login</a>
-              <a class="nav-item nav-link" href="/register">Register</a>
+              <a class="nav-item nav-link" href="/login" style="font-size: 16px;"><strong>Login</strong></a>
+              <a class="nav-item nav-link" href="/register" style="font-size: 16px;"><strong>Register</strong></a>
               {% endif %}
             </div>
           </div>
@@ -62,15 +62,15 @@
 
         {%if title == "New Resume" or title=="Projects" or title=="Education"  or title=="Experience"  or title == "Skills" or title == "Acheivements" %}
         <div class="col-md-4">
-          <div class="content-section">
+          <div class="content-section" style="background-color: #faf9f9; border-radius: 10px; box-shadow: 0px 10px 10px 0px rgba(241, 156, 121, 0.3);">
 
 
-              <a class="list-group-item list-group-item-light" class="active" href="/resume/new">Home</a>
-              <a class="list-group-item list-group-item-light" href="/resume/new/education">Education</a>
-              <a class="list-group-item list-group-item-light" href="/resume/new/experience">Experience</a>
-              <a class="list-group-item list-group-item-light" href="/resume/new/projects">Projects</a>
-              <a class="list-group-item list-group-item-light" href="/resume/new/skills">Skills</a>
-              <a class="list-group-item list-group-item-light" href="/resume/new/acheive">Acheivements</a>
+              <a class="list-group-item list-group-item-light" class="active" href="/resume/new" style="font-size: 16px;"><strong>Home</strong></a>
+              <a class="list-group-item list-group-item-light" href="/resume/new/education" style="font-size: 16px;"><strong>Education</strong></a>
+              <a class="list-group-item list-group-item-light" href="/resume/new/experience" style="font-size: 16px;"><strong>Experience</strong></a>
+              <a class="list-group-item list-group-item-light" href="/resume/new/projects" style="font-size: 16px;"><strong>Projects</strong></a>
+              <a class="list-group-item list-group-item-light" href="/resume/new/skills" style="font-size: 16px;"><strong>Skills</strong></a>
+              <a class="list-group-item list-group-item-light" href="/resume/new/acheive" style="font-size: 16px;"><strong>Acheivements</strong></a>
 
            
           </div>
