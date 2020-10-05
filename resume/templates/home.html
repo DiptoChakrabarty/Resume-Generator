@@ -1,40 +1,46 @@
 {% extends "layout.html" %} 
 {% block content %}
 
-    <h1>Welcome to Resume Generator</h1>
-    <p></p>
-
-    <div>
+    <div style="background-color: rgba(226, 234, 252, 0.5); padding: 30px; padding-left: 60px; padding-top: 1px; height: 33em; margin-top: 30px; border-radius: 21px; box-shadow: 0px 10px 10px 0px rgba(38, 70, 83, 0.6);">
+        <h2 style="color: #264653; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin-top: 100px; margin-left: 12px;"><strong>WELCOME TO THE RESUME GENERATOR</strong></h2>
+        <br>
         <article class="container">
-            <p class="article-content">Welcome to Resume Generator , create stunning resume </p>
-            <p class="article-content"> easily and fast , login  and  create your resume now  </p>
+            <p class="article-content" style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; font-size: 20px; color: #3d5a80;"><strong>Welcome to Resume Generator ! Create stunning resume.</strong></p>
+            <p class="article-content" style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; font-size: 20px; color: #3d5a80;"><strong>Easy, fast and convenient. Just login  and  create your resume now !</strong></p>
         </article>
-
+        <br>
         {% if current_user.is_authenticated %}
-        <a href="/accounts" class="btn btn-outline-warning" style="float: left;">Update Account details Here</a>
+        <div class="btn-group" style="height: 50px;">
+            <button class="update-btn" style="float: left; margin-right: 50px; background-color: #264653; border-radius: 5px; border-color: white;"
+                onmouseover="this.style.background='#ffd500'"
+                onmouseout="this.style.background='#264653'"><a href="/accounts" class="btn" style="color: white; float: left;"><strong>Update Account details Here</strong></a></button>
+            <button class="create-btn" style="float: left; margin-right: 50px; background-color: #264653; border-radius: 5px; border-color: white;"
+                onmouseover="this.style.background='#d62839'"
+                onmouseout="this.style.background='#264653'"><a href="/resume/new" class="btn" style="float: left; color: white;"><strong>Create Resume</strong></a></button>
+        </div>
         <br>
         <br>
         <br>
-        <a href="/resume/new" class="btn btn-outline-danger" style="float: left;">Create Resume</a>
-        <br>
-        <br>
-        <br>
-        <a href="/download" class="btn btn-outline-success" style="float: center;">Generate PDF of Resume</a>
-        <br>
-        <br>
-        <br>
-        <a href="/share" class="btn btn-outline-info" style="float: center;">Share  Resume</a>
-
+        <div class="btn-group" style="height: 50px;">
+            <button class="generate-btn" style="float: left; margin-right: 50px; background-color: #264653; border-radius: 5px; border-color: white;" 
+                onmouseover="this.style.background='green'"
+                onmouseout="this.style.background='#264653'"><a href="/download" class="btn" style="float: center; color: white;"><strong>Generate PDF of Resume</strong></a></button>
+            <br>
+            <br>
+            <br>
+            <button class="share-btn" style="float: left; margin-right: 50px; margin-left: 27px; background-color: #264653; border-radius: 5px; border-color: white;"
+                onmouseover="this.style.background='#788bff'"
+                onmouseout="this.style.background='#264653'"><a href="/share" class="btn" style="float: center; color: white;"><strong>Share Resume</strong></a></button>
+        </div>
         
-        
 
-
-        
         {% else %}
-        <a href="/login" class="btn btn-outline-success" style="float: left;">Login to Continue</a>
-        <a href="/register" class="btn btn-outline-info" style="float: right;">Register Here </a>
-        
-        
+        <button class="login-btn" style="float: left; margin-right: 50px; margin-left: 27px; background-color: #264653; border-radius: 5px; border-color: white;"
+            onmouseover="this.style.background='#22223b'"
+            onmouseout="this.style.background='#264653'"><a href="/login" class="btn" style="float: center; color: white;"><strong>Login to Continue</strong></a></button>
+        <button class="register-btn" style="float: left; margin-right: 50px; margin-left: 27px; background-color: #264653; border-radius: 5px; border-color: white;"
+            onmouseover="this.style.background='#22223b'"
+            onmouseout="this.style.background='#264653'"><a href="/register" class="btn" style="float: center; color: white;"><strong>Register Here</strong></a></button>     
         {% endif %}
         
     </div>
@@ -43,6 +49,4 @@
 
 
 {% endblock content %}
-
-
-    
+   

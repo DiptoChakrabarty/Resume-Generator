@@ -2,13 +2,13 @@
 {% block content %}
 
 
-<div class="content-section">
+<div class="content-section" style="border-radius: 10px; box-shadow: 0px 10px 10px 0px rgba(38, 70, 83, 0.6); width: 42em; background-color: rgba(226, 234, 252, 0.5); padding: 30px;">
    
     <form method="POST" action="">
         {{ form.hidden_tag() }}
         <fieldset class="form-group" id="cloneunder">
-            <legend class="border-bottom mb-4">Make Resume</legend>
-            <div class="form-group" id="skillclass">
+            <legend class="border-bottom mb-4" style="color: #264653; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;"><strong>CREATE YOUR RESUME</strong></legend>
+            <div class="form-group" id="skillclass"  style="color: #3d5a80; font-weight: 720; font-size: large;">
                 {{ form.achname.label(class="form-control-label") }}
 
                 {% if form.achname.errors %}
@@ -24,7 +24,7 @@
                 {{ form.achname(class="form-control form-control-lg") }}
                 {% endif %}
             </div>
-            <div class="form-group" id="skillclass">
+            <div class="form-group" id="skillclass"  style="color: #3d5a80; font-weight: 720; font-size: large;">
                 {{ form.achdesc.label(class="form-control-label") }}
 
                 {% if form.achdesc.errors %}
@@ -48,7 +48,9 @@
             
             </fieldset>
             <div class="form-group">
-                {{ form.submit(class="btn btn-outline-info") }}
+                {{ form.submit(class="btn", style="background-color: #264653; border-radius: 5px; border-color: white; color: white; font-weight: 700;",
+                onmouseover="this.style.background='#22223b'",
+                onmouseout="this.style.background='#264653'") }}
             </div>
 
     </form>

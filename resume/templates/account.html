@@ -1,20 +1,20 @@
 {% extends "layout.html" %} 
 {% block content %}
-<div class="content-section">
+<div class="content-section" style="border-radius: 10px; box-shadow: 0px 8px 10px 0px rgba(38, 70, 83, 0.6); width: 42em; background-color: rgba(226, 234, 252, 0.5); padding: 30px;">
        <div class="media">
          <img class="rounded-circle account-img" src="{{ image_file }}">
          <div class="media-body">
-           <h2 class="account-heading"> {{ current_user.username }}</h2>
-           <p class="text-secondary">{{ current_user.email }}</p>
+           <h2 class="account-heading" style="color: #3d5a80; font-weight: 720; font-size: 48;"><strong>{{ current_user.username }}</strong></h2>
+           <p class="text-secondary" style="color: #3d5a80; font-weight: 690; font-size: large; margin-left: 5px;">{{ current_user.email }}</p>
          </div>
        </div>
       
               <form method="POST" action="" enctype="multipart/form-data">
                   {{ form.hidden_tag() }}
                   <fieldset class="form-group">
-                      <legend class="border-bottom mb-4">About You</legend>
+                      <legend class="border-bottom mb-4" style="color: #264653;"><strong>About You</strong></legend>
        <div class="form-group">
-              {{ form.new_username.label(class="form-control-label") }}
+              {{ form.new_username.label(class="form-control-label", style="color: #264653; font-weight: 540; margin: 10px;") }}
               
               {% if form.new_username.errors %}
                      {{ form.new_username(class="form-control form-control-lg is-invalid") }}
@@ -30,7 +30,7 @@
             </div>
        
             <div class="form-group">
-                     {{ form.new_email.label(class="form-control-label") }}
+                     {{ form.new_email.label(class="form-control-label", style="color: #264653; font-weight: 540; margin-right: 29px; margin-left: 10px") }}
        
                      {% if form.new_email.errors %}
                             {{ form.new_email(class="form-control form-control-lg is-invalid") }}
@@ -45,8 +45,8 @@
                             
             </div>
             <div>
-                   {{ form.picture.label() }}
-                   {{ form.picture(class="form-control-file") }}
+                   {{ form.picture.label(style="color: #264653; font-weight: 540; margin-right: 29px; margin-left: 10px") }}
+                   {{ form.picture(class="form-control-file", style="color: #264653; font-weight: 540; margin-right: 29px; margin-left: 10px") }}
                    {% if form.picture.errors %}
                         {% for error in form.picture.errors %}
                             <span class="text-danger">{{ error }}</span></br>
@@ -54,7 +54,9 @@
                     {% endif %}
             </div>
             <div class="form-group">
-              {{ form.submit(class="btn btn-outline-info") }}
+              {{ form.submit(class="btn", style="background-color: #264653; border-radius: 5px; border-color: white; color: white; font-weight: 700; margin-top: 45px; margin-left: 10px;",
+              onmouseover="this.style.background='#22223b'",
+              onmouseout="this.style.background='#264653'") }}
           </div>
    
 </form>

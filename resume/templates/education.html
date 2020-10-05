@@ -2,14 +2,14 @@
 {% block content %}
 
 
-<div class="content-section">
+<div class="content-section" style="border-radius: 10px; box-shadow: 0px 10px 10px 0px rgba(38, 70, 83, 0.6); width: 42em; background-color: rgba(226, 234, 252, 0.5); padding: 30px;">
     <form method="POST" action="">
         {{ form.hidden_tag() }}
         <fieldset class="form-group" id="cloneunder">
-            <legend class="border-bottom mb-4">Make Resume</legend>
-            <h1>Education Details</h1>
+            <legend class="border-bottom mb-4" style="color: #264653; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;"><strong>CREATE YOUR RESUME</strong></legend>
+            <h5 style="color: #264653; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;"><strong>EDUCATION DETAILS</strong></h5>
             <div  id="skillclass">
-            <div class="form-group">
+            <div class="form-group" style="color: #3d5a80; font-weight: 720; font-size: large;">
                 {{ form.college.label(class="form-control-label") }}
 
                 {% if form.college.errors %}
@@ -24,7 +24,7 @@
                 {% endif %}
             </div>
 
-            <div class="form-group">
+            <div class="form-group" style="color: #3d5a80; font-weight: 720; font-size: large;">
                 {{ form.start.label(class="form-control-label") }}
 
                 {% if form.start.errors %}
@@ -39,7 +39,7 @@
                 {% endif %}
             </div>
 
-            <div class="form-group">
+            <div class="form-group" style="color: #3d5a80; font-weight: 720; font-size: large;">
                 {{ form.end.label(class="form-control-label") }}
 
                 {% if form.end.errors %}
@@ -54,7 +54,7 @@
                 {% endif %}
             </div>
 
-            <div class="form-group">
+            <div class="form-group" style="color: #3d5a80; font-weight: 720; font-size: large;">
                 {{ form.cgpa.label(class="form-control-label") }}
 
                 {% if form.cgpa.errors %}
@@ -70,9 +70,13 @@
             </div>
         </div>
         </fieldset>
-        <a href="/resume/new/experience" class="btn btn-outline-success" style="float: right;">Go to Work Experience</a>
+        <a href="/resume/new/experience" class="btn" style="float: right; background-color: #264653; border-radius: 5px; border-color: white; color: white; font-weight: 700;"
+        onmouseover="this.style.background='green'",
+        onmouseout="this.style.background='#264653'">Go to Work Experience</a>
         <div class="form-group">
-            {{ form.submit(class="btn btn-outline-info") }}
+            {{ form.submit(class="btn", style="background-color: #264653; border-radius: 5px; border-color: white; color: white; font-weight: 700;",
+                onmouseover="this.style.background='#22223b'",
+                onmouseout="this.style.background='#264653'") }}
         </div>
 </form>
 
@@ -81,11 +85,11 @@
 
 {% if eduadded and title=="Education"%}
 <div class="content-section">
-  <h4>Education Added</h4>
+  <h4 style="color: #264653; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;"><strong>EDUCATION ADDED</strong></h4>
         
             {% for education in eduadded %}
         <article>
-            <h2 class="article-title">{{ education.name }}</h2>
+            <h5 class="article-title">{{ education.name }}</h5>
             <p class="subDetails">Student</p>
             <p class="subDetails"> {{ education.start }} - {{ education.end }}</p>
             <h3>CGPA - {{ education.cgpa }}</h3>
