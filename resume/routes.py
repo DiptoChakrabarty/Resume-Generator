@@ -11,6 +11,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 title = "Posts"
+# Setting the correct path for configuration to wkhtmltopdf.exe
+path_to_wkhtmltopdf = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
 
 @app.route("/")
 def hello():
@@ -217,11 +219,13 @@ def downloadpdf():
     image_file = url_for('static',filename='profiles/'+ current_user.image_file)
     css = ["resume/static/resume.css","resume/static/main.css"]
     rendered = render_template("resume.html",edu=edu,exp=exp,pro=pro,usr=usr,sk=skillsadded,achmade=achmade,image_file=image_file)
-    pdf =pdfkit.from_string(rendered,False,css=css)
-
+    # Configure wkhtmltopdf PATH via custom configuration
+    config = pdfkit.configuration(wkhtmltopdf=path_to_wkhtmltopdf)
+    options={'page-size':'A4', 'dpi':400, 'disable-smart-shrinking': '','enable-local-file-access': ''}
+    pdf = pdfkit.from_string(rendered,False,css=css,configuration=config,options=options)
     response = make_response(pdf)
     response.headers["Content-Type"] = "application/pdf"
-    response.headers["Content-Disposition"] = "attachement; filename=resume.pdf"
+    response.headers["Content-Disposition"] = "attachment; filename=download.pdf"
 
     return response
     
@@ -314,7 +318,7 @@ def delete_exp(experience_id):
     db.session.delete(expview)
     db.session.commit()
     flash('Your experience detail post has been deleted!', 'success')
-    return redirect(url_for('postexp'))
+    return redirect(url_for('postexperience'))
     
 
 #Projects
