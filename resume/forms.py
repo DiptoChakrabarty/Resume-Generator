@@ -134,7 +134,7 @@ class resumebuilder(FlaskForm):
     email = StringField("Email Id",
         validators=[Email(),DataRequired()])
     phoneno= StringField("Phone No",
-        validators=[Regexp('^[0-9]*$')])
+        validators=[Regexp('^[0-9]*$'),DataRequired()])
     profile = TextAreaField("Description",
         validators=[Length(min=10)])
 
