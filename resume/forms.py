@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed,FileField
 from wtforms import StringField, PasswordField,SubmitField,BooleanField,TextAreaField
 from wtforms.fields.html5  import DateField
-from wtforms.validators import DataRequired,Length,Email,EqualTo,ValidationError
+from wtforms.validators import DataRequired,Length,Email,EqualTo,ValidationError,Regexp
 from resume.models import user
 from flask_login import current_user
 
@@ -132,10 +132,9 @@ class resumebuilder(FlaskForm):
     designation = StringField("Designation",
         validators=[DataRequired(),Length(min=3)])
     email = StringField("Email Id",
-        validators=[DataRequired(),Length(min=5)])
+        validators=[Email(),DataRequired()])
     phoneno= StringField("Phone No",
-        validators=[DataRequired(),Length(min=5)])
-
+        validators=[Regexp('^[0-9]*$'),DataRequired()])
     profile = TextAreaField("Description",
         validators=[Length(min=10)])
 
