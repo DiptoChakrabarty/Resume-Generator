@@ -18,12 +18,12 @@ class Reg(FlaskForm):
     submit = SubmitField('Sign Up')
 
     def validate_username(self,username):
-        users = UserModel.query.filter_by(username=username.data).first()
+        users = UserModel.find_by_username(username.data)
         if users:
             raise ValidationError('Username used already')
 
     def validate_email(self,email):
-        email = UserModel.query.filter_by(email=email.data).first()
+        email = UserModel.find_by_email(email.data)
         if email:
             raise ValidationError('Email used already')
 
@@ -50,12 +50,12 @@ class account(FlaskForm):
     submit = SubmitField('Update Account')
     def validate_username(self,new_username):
         if new_username.data != current_user.username:
-            username = user.query.filter_by(username=new_username.data)
+            username = UserModel.find_by_username(new_username.data)
             if username:
                 raise ValidationError("Username Already present")
     def validate_email(self,new_email):
         if new_email != current_user.email:
-            emailid = UserModel.query.filter_by(email=new_email.data)
+            emailid = UserModel.find_by_email(new_email.data)
             if emailid:
                 return ValidationError("Email Id used already")
 
@@ -163,7 +163,7 @@ class requestresetform(FlaskForm):
     submit = SubmitField("Reset Password")
 
     def validate_email(self,email):
-        user_email = UserModel.query.filter_by(email=email.data).first()
+        user_email = UserModel.find_by_email(email.data)
         if user_email is None:
             raise ValidationError("The email is unverified please register using this email")
 

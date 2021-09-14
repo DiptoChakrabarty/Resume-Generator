@@ -39,7 +39,7 @@ def login():
         return redirect(url_for('hello'),code=301)
     form = Login()
     if form.validate_on_submit():
-        logged = UserModel.query.filter_by(email=form.email.data).first()
+        logged = UserModel.find_by_email(form.email.data)
         if logged and bcrypt.check_password_hash(logged.password,form.password.data):
             login_user(logged,remember=form.remember.data)
             next_page = request.args.get('next')            
@@ -373,7 +373,7 @@ def request_reset():
         return redirect(url_for('hello'),code=301)
     form = requestresetform()
     if form.validate_on_submit():
-        req_user = UserModel.query.filter_by(email=form.email.data).first()
+        req_user = UserModel.find_by_email(form.email.data)
         send_reset_pass(req_user)
         flash("Email has been sent with instructions to Reset Password")
         return redirect(url_for("hello"),code=301)
