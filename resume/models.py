@@ -6,10 +6,11 @@ from itsdangerous import TimedJSONWebSignatureSerializer as serializer
 
 @login_manager.user_loader
 def load_user(id):
-    return user.query.get(int(id))
+    return UserModel.query.get(int(id))
 
 
-class user(db.Model,UserMixin):
+class UserModel(db.Model,UserMixin):
+    __tablename__= "user"
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20),unique=True,nullable=False)
     email = db.Column(db.String(120),unique=True,nullable=False)

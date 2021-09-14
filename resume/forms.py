@@ -3,7 +3,7 @@ from flask_wtf.file import FileAllowed,FileField
 from wtforms import StringField, PasswordField,SubmitField,BooleanField,TextAreaField
 from wtforms.fields.html5  import DateField
 from wtforms.validators import DataRequired,Length,Email,EqualTo,ValidationError,Regexp
-from resume.models import user
+from resume.models import UserModel
 from flask_login import current_user
 
 class Reg(FlaskForm):
@@ -18,12 +18,12 @@ class Reg(FlaskForm):
     submit = SubmitField('Sign Up')
 
     def validate_username(self,username):
-        users = user.query.filter_by(username=username.data).first()
+        users = UserModel.query.filter_by(username=username.data).first()
         if users:
             raise ValidationError('Username used already')
 
     def validate_email(self,email):
-        email = user.query.filter_by(email=email.data).first()
+        email = UserModel.query.filter_by(email=email.data).first()
         if email:
             raise ValidationError('Email used already')
 
@@ -55,7 +55,7 @@ class account(FlaskForm):
                 raise ValidationError("Username Already present")
     def validate_email(self,new_email):
         if new_email != current_user.email:
-            emailid = user.query.filter_by(email=new_email.data)
+            emailid = UserModel.query.filter_by(email=new_email.data)
             if emailid:
                 return ValidationError("Email Id used already")
 
@@ -163,7 +163,7 @@ class requestresetform(FlaskForm):
     submit = SubmitField("Reset Password")
 
     def validate_email(self,email):
-        user_email = user.query.filter_by(email=email.data).first()
+        user_email = UserModel.query.filter_by(email=email.data).first()
         if user_email is None:
             raise ValidationError("The email is unverified please register using this email")
 

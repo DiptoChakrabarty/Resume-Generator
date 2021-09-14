@@ -1,6 +1,6 @@
 from flask import Flask,make_response,render_template,url_for,flash,redirect,request,abort
 from resume.forms import Reg,Login,account,posting,resumebuilder,useredu,userexp,userpro,usersk,achieve,requestresetform,resetpassword
-from resume.models import user,education,experience,projects,userdetails,skills,achievements
+from resume.models import UserModel,education,experience,projects,userdetails,skills,achievements
 from resume import app,db, bcrypt , mail
 from flask_login import login_user,current_user,logout_user,login_required
 from flask_mail import Message
@@ -26,7 +26,7 @@ def register():
     form = Reg()
     if form.validate_on_submit():
         hashed = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        new_user = user(username=form.username.data,email=form.email.data,password=hashed)
+        new_user = UserModel(username=form.username.data,email=form.email.data,password=hashed)
         db.session.add(new_user)
         db.session.commit()
         flash(f'Account Created for {form.username.data}!','success')
@@ -39,7 +39,7 @@ def login():
         return redirect(url_for('hello'),code=301)
     form = Login()
     if form.validate_on_submit():
-        logged = user.query.filter_by(email=form.email.data).first()
+        logged = UserModel.query.filter_by(email=form.email.data).first()
         if logged and bcrypt.check_password_hash(logged.password,form.password.data):
             login_user(logged,remember=form.remember.data)
             next_page = request.args.get('next')            
@@ -354,7 +354,7 @@ def delete_pro(project_id):
 ####       Reset Password  ####
 def send_reset_pass(user):
     email_id= os.environ["MAIL_USERNAME"]
-    token = user.reset_token()
+    token = UserModel.reset_token()
     msg= Message("Password Reset Request",
     sender="{}".format(email_id),recipients=[user.email])
 
@@ -373,7 +373,7 @@ def request_reset():
         return redirect(url_for('hello'),code=301)
     form = requestresetform()
     if form.validate_on_submit():
-        req_user = user.query.filter_by(email=form.email.data).first()
+        req_user = UserModel.query.filter_by(email=form.email.data).first()
         send_reset_pass(req_user)
         flash("Email has been sent with instructions to Reset Password")
         return redirect(url_for("hello"),code=301)
@@ -384,7 +384,7 @@ def request_reset():
 def token_reset(token):
     if current_user.is_authenticated:
         return redirect(url_for('hello'),code=302)
-    user_req = user.verify_token(token)
+    user_req = UserModel.verify_token(token)
     if user_req is None:
         flash("Token is Invalid or Expired","warning")
         return redirect(url_for('request_reset'),code=307)
