@@ -6,10 +6,11 @@ from itsdangerous import TimedJSONWebSignatureSerializer as serializer
 
 @login_manager.user_loader
 def load_user(id):
-    return user.query.get(int(id))
+    return UserModel.query.get(int(id))
 
 
-class user(db.Model,UserMixin):
+class UserModel(db.Model,UserMixin):
+    __tablename__= "user"
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20),unique=True,nullable=False)
     email = db.Column(db.String(120),unique=True,nullable=False)
@@ -31,6 +32,23 @@ class user(db.Model,UserMixin):
     def __retr__(self):
         return  "User {}  Email {}  Image {}".format(self.username,self.email,self.image_file)
     
+
+    def add_to_database(self):
+        db.session.add(self)
+        db.session.commit()
+    
+    def delete_from_database(self):
+        db.session.delete(self)
+        db.session.commit()
+    
+    @classmethod
+    def find_by_username(cls,username):
+        return cls.query.filter_by(username=username).first()
+    
+    @classmethod
+    def find_by_email(cls,email):
+        return cls.query.filter_by(email=email).first()
+    
     def reset_token(self,expires_sec=1800):
         s = serializer(app.config['SECRET_KEY'],expires_sec)
         return s.dumps({"user_id": self.id}).decode("utf-8")
@@ -42,7 +60,7 @@ class user(db.Model,UserMixin):
             user_id = s.loads(token)['user_id']
         except:
             return None
-        return user.query.get(user_id)
+        return UserModel.query.get(user_id)
 
 
 

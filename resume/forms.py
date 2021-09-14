@@ -3,7 +3,7 @@ from flask_wtf.file import FileAllowed,FileField
 from wtforms import StringField, PasswordField,SubmitField,BooleanField,TextAreaField
 from wtforms.fields.html5  import DateField
 from wtforms.validators import DataRequired,Length,Email,EqualTo,ValidationError,Regexp
-from resume.models import user
+from resume.models import UserModel
 from flask_login import current_user
 
 class Reg(FlaskForm):
@@ -18,12 +18,12 @@ class Reg(FlaskForm):
     submit = SubmitField('Sign Up')
 
     def validate_username(self,username):
-        users = user.query.filter_by(username=username.data).first()
+        users = UserModel.find_by_username(username.data)
         if users:
             raise ValidationError('Username used already')
 
     def validate_email(self,email):
-        email = user.query.filter_by(email=email.data).first()
+        email = UserModel.find_by_email(email.data)
         if email:
             raise ValidationError('Email used already')
 
@@ -50,12 +50,12 @@ class account(FlaskForm):
     submit = SubmitField('Update Account')
     def validate_username(self,new_username):
         if new_username.data != current_user.username:
-            username = user.query.filter_by(username=new_username.data)
+            username = UserModel.find_by_username(new_username.data)
             if username:
                 raise ValidationError("Username Already present")
     def validate_email(self,new_email):
         if new_email != current_user.email:
-            emailid = user.query.filter_by(email=new_email.data)
+            emailid = UserModel.find_by_email(new_email.data)
             if emailid:
                 return ValidationError("Email Id used already")
 
@@ -163,7 +163,7 @@ class requestresetform(FlaskForm):
     submit = SubmitField("Reset Password")
 
     def validate_email(self,email):
-        user_email = user.query.filter_by(email=email.data).first()
+        user_email = UserModel.find_by_email(email.data)
         if user_email is None:
             raise ValidationError("The email is unverified please register using this email")
 

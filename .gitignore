@@ -1,2 +1,4 @@
 __pycache__
 resume/.env
+venv
+site.db
