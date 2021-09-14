@@ -27,8 +27,7 @@ def register():
     if form.validate_on_submit():
         hashed = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         new_user = UserModel(username=form.username.data,email=form.email.data,password=hashed)
-        db.session.add(new_user)
-        db.session.commit()
+        new_user.add_to_database()
         flash(f'Account Created for {form.username.data}!','success')
         return redirect(url_for('login'),code=302)
     return render_template('register.html',title='Register',form=form)
@@ -392,7 +391,7 @@ def token_reset(token):
     if form.validate_on_submit():
         hashed = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         user_req.password = hashed
-        db.session.commit()
+        user_req.add_to_database()
         flash(f'Password Updated ','success')
         return redirect(url_for('login'),code=302)
     return render_template("reset_password.html",title="Reset Password",form=form)
