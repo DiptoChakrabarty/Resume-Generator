@@ -1,5 +1,5 @@
 from flask import Flask,make_response,render_template,url_for,flash,redirect,request,abort
-from resume.forms import Reg,Login,account,posting,resumebuilder,useredu,userexp,userpro,usersk,achieve,requestresetform,resetpassword
+from resume.forms import RegistrationForm,Login,account,posting,resumebuilder,useredu,userexp,userpro,usersk,achieve,requestresetform,resetpassword
 from resume.models import UserModel,education,experience,projects,userdetails,skills,achievements
 from resume import app,db, bcrypt , mail
 from flask_login import login_user,current_user,logout_user,login_required
@@ -23,7 +23,7 @@ def hello():
 def register():
     if current_user.is_authenticated:
         return redirect(url_for('hello'),code=301)
-    form = Reg()
+    form = RegistrationForm()
     if form.validate_on_submit():
         hashed = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         new_user = UserModel(username=form.username.data,email=form.email.data,password=hashed)
