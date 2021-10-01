@@ -28,7 +28,7 @@ class RegistrationForm(FlaskForm):
             raise ValidationError('Email used already')
 
 
-class Login(FlaskForm):
+class LoginForm(FlaskForm):
     email = StringField('Email',
         validators=[DataRequired(),Email()])
     password = PasswordField('Password',
@@ -60,7 +60,7 @@ class account(FlaskForm):
                 return ValidationError("Email Id used already")
 
 
-class posting(FlaskForm):
+class PostingForm(FlaskForm):
     title = StringField("Name",
         validators=[DataRequired(),Length(min=5)])
     content = TextAreaField("Description",
